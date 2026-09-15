@@ -1,26 +1,47 @@
 @import "pretendard/dist/web/static/pretendard.css";
 @import "tailwindcss";
 
-@theme {
-	--font-sans: 'Pretendard', sans-serif;
-	--color-brand-ocean: #1678ad;
-	--color-brand-ocean-deep: #07547d;
-	--color-brand-sky: #d9edf7;
-	--color-brand-crab: #c52b20;
-	--color-brand-crab-dark: #961d16;
-	--color-brand-sun: #f5c518;
-	--color-brand-fresh: #4f8f50;
+:root {
+	--brand-ocean: #1678ad;
+	--brand-ocean-deep: #07547d;
+	--brand-sky: #d9edf7;
+	--brand-crab: #c52b20;
+	--brand-crab-dark: #961d16;
+	--brand-sun: #f5c518;
+	--brand-fresh: #4f8f50;
 
-	--color-surface-base: #ffffff;
-	--color-surface-muted: #f6f7f5;
-	--color-surface-accent: #fff7e6;
-	--color-border-subtle: #d9ded9;
-	--color-text-primary: #1d2421;
-	--color-text-secondary: #5d6963;
-	--color-text-inverse: #ffffff;
-	--color-state-success: #347a42;
-	--color-state-warning: #c78600;
-	--color-state-danger: #c52b20;
+	--surface-base: #ffffff;
+	--surface-muted: #f6f7f5;
+	--surface-accent: #fff7e6;
+	--border-subtle: #d9ded9;
+	--text-primary: #1d2421;
+	--text-secondary: #5d6963;
+	--text-inverse: #ffffff;
+	--state-success: #347a42;
+	--state-warning: #c78600;
+	--state-danger: #c52b20;
+}
+
+@theme inline {
+	--font-sans: 'Pretendard', sans-serif;
+	--color-brand-ocean: var(--brand-ocean);
+	--color-brand-ocean-deep: var(--brand-ocean-deep);
+	--color-brand-sky: var(--brand-sky);
+	--color-brand-crab: var(--brand-crab);
+	--color-brand-crab-dark: var(--brand-crab-dark);
+	--color-brand-sun: var(--brand-sun);
+	--color-brand-fresh: var(--brand-fresh);
+
+	--color-surface-base: var(--surface-base);
+	--color-surface-muted: var(--surface-muted);
+	--color-surface-accent: var(--surface-accent);
+	--color-border-subtle: var(--border-subtle);
+	--color-text-primary: var(--text-primary);
+	--color-text-secondary: var(--text-secondary);
+	--color-text-inverse: var(--text-inverse);
+	--color-state-success: var(--state-success);
+	--color-state-warning: var(--state-warning);
+	--color-state-danger: var(--state-danger);
 }
 
 body {
