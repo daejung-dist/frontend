@@ -1,4 +1,6 @@
-@import "pretendard/dist/web/static/pretendard.css";
+@import "@fontsource/nanum-gothic/400.css";
+@import "@fontsource/nanum-gothic/700.css";
+@import "@fontsource/nanum-gothic/800.css";
 @import "tailwindcss";
 
 :root {
@@ -23,7 +25,7 @@
 }
 
 @theme inline {
-	--font-sans: 'Pretendard', sans-serif;
+	--font-sans: 'Nanum Gothic', sans-serif;
 	--color-brand-ocean: var(--brand-ocean);
 	--color-brand-ocean-deep: var(--brand-ocean-deep);
 	--color-brand-sky: var(--brand-sky);
@@ -44,6 +46,16 @@
 	--color-state-danger: var(--state-danger);
 }
 
+@keyframes text-flash-sun {
+	50% {
+		color: var(--brand-sun);
+	}
+}
+
+.text-flash-sun {
+	animation: text-flash-sun 1s steps(1, end) infinite;
+}
+
 body {
-	font-family: 'Pretendard', sans-serif;
+	font-family: 'Nanum Gothic', sans-serif;
 }
