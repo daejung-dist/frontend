@@ -1,10 +1,61 @@
-@import "pretendard/dist/web/static/pretendard.css";
+@import "@fontsource/nanum-gothic/400.css";
+@import "@fontsource/nanum-gothic/700.css";
+@import "@fontsource/nanum-gothic/800.css";
 @import "tailwindcss";
 
-@theme {
-	--font-sans: 'Pretendard', sans-serif;
+:root {
+	--brand-ocean: #1678ad;
+	--brand-ocean-deep: #07547d;
+	--brand-sky: #d9edf7;
+	--brand-crab: #c52b20;
+	--brand-crab-dark: #961d16;
+	--brand-sun: #f5c518;
+	--brand-fresh: #4f8f50;
+
+	--surface-base: #ffffff;
+	--surface-muted: #f6f7f5;
+	--surface-accent: #fff7e6;
+	--border-subtle: #d9ded9;
+	--text-primary: #1d2421;
+	--text-secondary: #5d6963;
+	--text-inverse: #ffffff;
+	--state-success: #347a42;
+	--state-warning: #c78600;
+	--state-danger: #c52b20;
+}
+
+@theme inline {
+	--font-sans: 'Nanum Gothic', sans-serif;
+	--color-brand-ocean: var(--brand-ocean);
+	--color-brand-ocean-deep: var(--brand-ocean-deep);
+	--color-brand-sky: var(--brand-sky);
+	--color-brand-crab: var(--brand-crab);
+	--color-brand-crab-dark: var(--brand-crab-dark);
+	--color-brand-sun: var(--brand-sun);
+	--color-brand-fresh: var(--brand-fresh);
+
+	--color-surface-base: var(--surface-base);
+	--color-surface-muted: var(--surface-muted);
+	--color-surface-accent: var(--surface-accent);
+	--color-border-subtle: var(--border-subtle);
+	--color-text-primary: var(--text-primary);
+	--color-text-secondary: var(--text-secondary);
+	--color-text-inverse: var(--text-inverse);
+	--color-state-success: var(--state-success);
+	--color-state-warning: var(--state-warning);
+	--color-state-danger: var(--state-danger);
+}
+
+@keyframes text-flash-sun {
+	50% {
+		color: var(--brand-sun);
+	}
+}
+
+.text-flash-sun {
+	animation: text-flash-sun 1s steps(1, end) infinite;
 }
 
 body {
-	font-family: 'Pretendard', sans-serif;
+	font-family: 'Nanum Gothic', sans-serif;
 }

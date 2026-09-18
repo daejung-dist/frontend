@@ -1,19 +1,19 @@
-import ProductCard from './ProductCard'
-import { homeProducts } from '../data/homeProducts'
+import ProductCard from '@/features/home/components/ProductCard'
+import { homeProducts } from '@/features/home/data/homeProducts'
 
 function ProductSection() {
 	return (
-		<section className="mx-auto w-[calc(100%-48px)] max-w-[1180px] pt-16 max-[700px]:w-[calc(100%-28px)] max-[700px]:pt-10" aria-labelledby="home-products-title">
-			<div className="mb-6 text-center">
-				<p className="mb-2.5 text-xs font-extrabold tracking-[1.5px] text-[#d96754]">DAEJUNG PICK</p>
-				<h2 className="m-0 text-[26px] tracking-[-1px] text-[#203548] max-[700px]:text-[22px]" id="home-products-title">지금 가장 신선한 상품</h2>
+		<section className="mx-auto w-240 border-x border-[#d5dfe3] bg-white px-3 pt-8 pb-12 shadow-[inset_0_1px_0_white] max-[700px]:w-[calc(100%-28px)] max-[700px]:border-0 max-[700px]:px-0 max-[700px]:pt-6" aria-labelledby="home-products-title">
+			<div className="mb-3 border-b-2 border-brand-ocean bg-[#f3f6f7] px-3 py-2 text-left shadow-[inset_0_1px_0_white]">
+				<h2 className="mt-0.5 text-xl font-black tracking-[-1px] text-black max-[700px]:text-lg" id="home-products-title">추천상품</h2>
 			</div>
 
-			<div className="grid grid-cols-2 gap-6 max-[700px]:grid-cols-1 max-[700px]:gap-4">
+			<div className="grid grid-cols-2 gap-3 max-[700px]:grid-cols-1 max-[700px]:gap-2">
 				{homeProducts.map((product) => (
 					<ProductCard key={product.name} product={product} />
 				))}
 			</div>
+			
 		</section>
 	)
 }

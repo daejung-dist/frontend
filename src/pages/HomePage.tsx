@@ -1,5 +1,5 @@
-import HeroSection from '../features/home/components/HeroSection'
-import ProductSection from '../features/home/components/ProductSection'
+import HeroSection from '@/features/home/components/HeroSection'
+import ProductSection from '@/features/home/components/ProductSection'
 
 function HomePage() {
     return (
