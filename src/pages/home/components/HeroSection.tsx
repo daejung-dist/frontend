@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
-import heroCalamari from '@/assets/images/banners/hero-calamari.jpg'
-import heroCrab from '@/assets/images/banners/hero-crab.jpg'
+import heroCalamari from '@/shared/assets/images/banners/hero-calamari.jpg'
+import heroCrab from '@/shared/assets/images/banners/hero-crab.jpg'
 
 function HeroSection() {
 	const [activeImageIndex, setActiveImageIndex] = useState(0)
@@ -24,10 +24,8 @@ function HeroSection() {
 				alt="대정유통 배너 이미지"
 			/>
 			<div className="absolute top-1/2 left-8 -translate-y-1/2 max-[700px]:left-4">
-				<p className="w-fit border border-[#8d1713] bg-brand-crab px-2 py-1 text-lg font-black text-white shadow-[1px_1px_0_#fff] max-[700px]:text-sm">후포 수협 69번 중매인이 선별한</p>
-				<p className="mt-1 w-fit border border-[#b28b00] bg-brand-sun px-2 py-1 text-xl font-black text-black shadow-[1px_1px_0_#fff] max-[700px]:text-base">산지직송 당일배송</p>
-				<h2 className="mt-2 text-[42px] font-black leading-[1.2] tracking-[-2px] text-black [text-shadow:1px_1px_0_#fff,2px_2px_3px_rgba(0,0,0,0.3)] max-[700px]:text-[28px]">불필요한 유통과정 없이<br />품질은 높였습니다!</h2>
-				<p className="mt-2 text-2xl font-black tracking-[-1px] text-black [text-shadow:1px_1px_0_#fff,2px_2px_3px_rgba(0,0,0,0.3)] max-[700px]:text-lg">100% 품질보장 자연산 홍게</p>
+				<h2 className="mt-2 text-[42px] font-black leading-[1.2] tracking-[-2px] text-brand-crab [-webkit-text-stroke:4px_white] [paint-order:stroke_fill] max-[700px]:text-[28px]">후포 수협 69번 중매인이 선별한<br />산지직송 당일배송</h2>
+				<p className="mt-2 text-2xl font-black tracking-[-1px] text-black [-webkit-text-stroke:4px_white] [paint-order:stroke_fill] max-[700px]:text-lg">100% 품질보장 자연산 홍게</p>
 			</div>
 		</section>
 	)
