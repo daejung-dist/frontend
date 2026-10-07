@@ -1,7 +1,9 @@
-import ProductCard from '@/features/home/components/ProductCard'
-import { homeProducts } from '@/features/home/data/homeProducts'
+import ProductCard from '@/features/hongge/components/ProductCard'
+import { useHongges } from '@/features/hongge/hooks/useHongges'
 
 function ProductSection() {
+	const { data: hongges, isPending, isError } = useHongges()
+
 	return (
 		<section className="mx-auto w-240 border-x border-[#d5dfe3] bg-white px-3 pt-8 pb-12 shadow-[inset_0_1px_0_white] max-[700px]:w-[calc(100%-28px)] max-[700px]:border-0 max-[700px]:px-0 max-[700px]:pt-6" aria-labelledby="home-products-title">
 			<div className="mb-3 border-b-2 border-brand-ocean bg-[#f3f6f7] px-3 py-2 text-left shadow-[inset_0_1px_0_white]">
@@ -9,10 +11,12 @@ function ProductSection() {
 			</div>
 
 			<div className="grid grid-cols-2 gap-3 max-[700px]:grid-cols-1 max-[700px]:gap-2">
-				{homeProducts.map((product) => (
-					<ProductCard key={product.name} product={product} />
+				{hongges?.map((product) => (
+					<ProductCard key={product.id} product={product} />
 				))}
 			</div>
+			{isPending && <p className="py-8 text-center text-sm">상품을 불러오는 중입니다.</p>}
+			{isError && <p className="py-8 text-center text-sm">상품을 불러오지 못했습니다.</p>}
 			
 		</section>
 	)

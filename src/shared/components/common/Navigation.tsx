@@ -2,7 +2,7 @@ import { NavLink } from 'react-router'
 
 const navigationItems = [
 	{ label: '홈', to: '/' },
-	{ label: '상품', to: '/products' },
+	{ label: '상품목록', to: '/products' },
 	{ label: '회사소개', to: '/about' },
 	{ label: '고객센터', to: '/support' },
 ]
