@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router'
 
-import Navigation from '@/components/common/Navigation'
+import Navigation from '@/shared/components/common/Navigation'
 
 function Header() {
 	return (
