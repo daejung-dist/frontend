@@ -15,4 +15,10 @@ export interface SignupRequest {
 	name: string
 }
 
+export interface LoginRequest {
+	email: string
+	password: string
+}
+
 export type SignupResponse = AuthResponse
+export type LoginResponse = AuthResponse
