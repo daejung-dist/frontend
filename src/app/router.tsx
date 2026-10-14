@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router'
 
 import MainLayout from '@/app/layouts/MainLayout'
+import AboutPage from '@/pages/about/AboutPage'
 import HomePage from '@/pages/home/HomePage'
 import LoginPage from '@/pages/login/LoginPage'
 import ProductListPage from '@/pages/product-list/ProductListPage'
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
 			{
 				path: '/',
 				element: <HomePage />,
+			},
+			{
+				path: '/about',
+				element: <AboutPage />,
 			},
 			{
 				path: '/products',

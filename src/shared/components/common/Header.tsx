@@ -67,8 +67,6 @@ function Header() {
 						<NavLink className="hover:text-brand-sun" to="/mypage">마이페이지</NavLink>
 						<span className="text-white/50">|</span>
 						<NavLink className="hover:text-brand-sun" to="/cart">장바구니</NavLink>
-						<span className="text-white/50">|</span>
-						<NavLink className="hover:text-brand-sun" to="/support">고객센터</NavLink>
 					</div>
 				</div>
 			</div>
