@@ -5,23 +5,41 @@ import { Link, useNavigate } from 'react-router'
 
 import { signup } from '@/features/auth/api/auth'
 import { useAuthStore } from '@/features/auth/stores/authStore'
+import type { Gender } from '@/features/auth/types'
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const PHONE_NUMBER_PATTERN = /^[0-9\-+() ]{8,20}$/
+
+interface SignupForm {
+	email: string
+	password: string
+	name: string
+	phoneNumber: string
+	defaultShippingAddress: string
+	birthDate: string
+	gender: Gender | ''
+}
+
+const INITIAL_FORM: SignupForm = {
+	email: '',
+	password: '',
+	name: '',
+	phoneNumber: '',
+	defaultShippingAddress: '',
+	birthDate: '',
+	gender: '',
+}
 
 function SignupPage() {
 	const navigate = useNavigate()
 	const setAuth = useAuthStore((state) => state.setAuth)
 
-	const [form, setForm] = useState({
-		email: '',
-		password: '',
-		name: '',
-	})
+	const [form, setForm] = useState<SignupForm>(INITIAL_FORM)
 	const [isSubmitting, setIsSubmitting] = useState(false)
 	const [errorMessage, setErrorMessage] = useState('')
 	const [successMessage, setSuccessMessage] = useState('')
 
-	const onChange = (field: keyof typeof form, value: string) => {
+	const onChange = <Field extends keyof SignupForm>(field: Field, value: SignupForm[Field]) => {
 		setForm((prev) => ({ ...prev, [field]: value }))
 		setErrorMessage('')
 		setSuccessMessage('')
@@ -33,6 +51,15 @@ function SignupPage() {
 		if (!form.password) return '비밀번호는 필수입니다.'
 		if (form.password.length < 8) return '비밀번호는 최소 8자 이상이어야 합니다.'
 		if (!form.name.trim()) return '이름은 필수입니다.'
+		if (!form.phoneNumber.trim()) return '휴대폰 번호는 필수입니다.'
+		if (!PHONE_NUMBER_PATTERN.test(form.phoneNumber.trim())) return '휴대폰 번호 형식이 올바르지 않습니다.'
+		if (!form.defaultShippingAddress.trim()) return '기본 배송지 주소는 필수입니다.'
+		if (!form.birthDate) return '생년월일은 필수입니다.'
+		const birthDate = new Date(`${form.birthDate}T00:00:00`)
+		const today = new Date()
+		today.setHours(0, 0, 0, 0)
+		if (Number.isNaN(birthDate.getTime()) || birthDate >= today) return '생년월일은 과거 날짜여야 합니다.'
+		if (!form.gender) return '성별은 필수입니다.'
 		return ''
 	}
 
@@ -54,12 +81,16 @@ function SignupPage() {
 				email: form.email.trim(),
 				password: form.password,
 				name: form.name.trim(),
+				phoneNumber: form.phoneNumber.trim(),
+				defaultShippingAddress: form.defaultShippingAddress.trim(),
+				birthDate: form.birthDate,
+				gender: form.gender as Gender,
 			})
 
 			const { accessToken, ...user } = response
 			setAuth(accessToken, user)
 			setSuccessMessage(`${user.name}님, 회원가입이 완료되었습니다.`)
-			setForm({ email: '', password: '', name: '' })
+			setForm(INITIAL_FORM)
 			setTimeout(() => navigate('/', { replace: true }), 800)
 		} catch (error) {
 			if (isAxiosError(error)) {
@@ -128,6 +159,66 @@ function SignupPage() {
 								disabled={isSubmitting}
 								onChange={(event) => onChange('name', event.target.value)}
 							/>
+						</div>
+
+						<div className="mt-3 flex flex-col gap-1">
+							<label className="text-xs font-bold text-[#49545a]" htmlFor="signup-phone-number">휴대폰 번호</label>
+							<input
+								className="h-10 border border-[#9da9ad] bg-white px-3 text-sm shadow-[inset_1px_1px_0_#e4e9eb] outline-none focus:border-brand-ocean focus:shadow-[inset_0_0_0_1px_var(--brand-sky)]"
+								id="signup-phone-number"
+								type="tel"
+								autoComplete="tel"
+								inputMode="tel"
+								placeholder="010-1234-5678"
+								value={form.phoneNumber}
+								disabled={isSubmitting}
+								onChange={(event) => onChange('phoneNumber', event.target.value)}
+							/>
+						</div>
+
+						<div className="mt-3 flex flex-col gap-1">
+							<label className="text-xs font-bold text-[#49545a]" htmlFor="signup-address">기본 배송지 주소</label>
+							<input
+								className="h-10 border border-[#9da9ad] bg-white px-3 text-sm shadow-[inset_1px_1px_0_#e4e9eb] outline-none focus:border-brand-ocean focus:shadow-[inset_0_0_0_1px_var(--brand-sky)]"
+								id="signup-address"
+								type="text"
+								autoComplete="street-address"
+								placeholder="주소를 입력해 주세요"
+								value={form.defaultShippingAddress}
+								disabled={isSubmitting}
+								onChange={(event) => onChange('defaultShippingAddress', event.target.value)}
+							/>
+						</div>
+
+						<div className="mt-3 grid grid-cols-2 gap-3 max-[460px]:grid-cols-1">
+							<div className="flex flex-col gap-1">
+								<label className="text-xs font-bold text-[#49545a]" htmlFor="signup-birth-date">생년월일</label>
+								<input
+									className="h-10 border border-[#9da9ad] bg-white px-3 text-sm shadow-[inset_1px_1px_0_#e4e9eb] outline-none focus:border-brand-ocean focus:shadow-[inset_0_0_0_1px_var(--brand-sky)]"
+									id="signup-birth-date"
+									type="date"
+									autoComplete="bday"
+									value={form.birthDate}
+									disabled={isSubmitting}
+									onChange={(event) => onChange('birthDate', event.target.value)}
+								/>
+							</div>
+
+							<div className="flex flex-col gap-1">
+								<label className="text-xs font-bold text-[#49545a]" htmlFor="signup-gender">성별</label>
+								<select
+									className="h-10 border border-[#9da9ad] bg-white px-3 text-sm shadow-[inset_1px_1px_0_#e4e9eb] outline-none focus:border-brand-ocean focus:shadow-[inset_0_0_0_1px_var(--brand-sky)]"
+									id="signup-gender"
+									value={form.gender}
+									disabled={isSubmitting}
+									onChange={(event) => onChange('gender', event.target.value as SignupForm['gender'])}
+								>
+									<option value="">선택해 주세요</option>
+									<option value="MALE">남성</option>
+									<option value="FEMALE">여성</option>
+									<option value="OTHER">기타</option>
+								</select>
+							</div>
 						</div>
 
 						{errorMessage && (
