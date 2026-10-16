@@ -1,5 +1,4 @@
 import { isAxiosError } from 'axios'
-import { UserRoundPlus } from 'lucide-react'
 import { useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 
