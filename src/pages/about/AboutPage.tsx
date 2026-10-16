@@ -5,7 +5,7 @@ import heroCrab from '@/shared/assets/images/banners/hero-crab.jpg'
 const promises = [
 	{
 		number: '1',
-		title: '선주 직배송',
+		title: '중매인 직배송',
 		description: '산지 직송으로 더욱 신선하게!',
 		image: heroCrab,
 		alt: '바다에서 조업 중인 배',
