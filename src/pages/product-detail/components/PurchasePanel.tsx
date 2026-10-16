@@ -1,5 +1,6 @@
 import { Minus, Plus } from 'lucide-react'
 import { useState } from 'react'
+import { useNavigate } from 'react-router'
 
 import type { Hongge } from '@/features/hongge/types'
 
@@ -8,6 +9,7 @@ interface PurchasePanelProps {
 }
 
 function PurchasePanel({ hongge }: PurchasePanelProps) {
+	const navigate = useNavigate()
 	const [count, setCount] = useState(1)
 	const soldOut = hongge.quantity <= 0
 
@@ -52,6 +54,7 @@ function PurchasePanel({ hongge }: PurchasePanelProps) {
 					className="border-2 border-brand-ocean-deep bg-white px-4 py-3 text-sm font-bold text-brand-ocean-deep disabled:border-[#b8c2c6] disabled:text-[#9da9ad]"
 					type="button"
 					disabled={soldOut}
+					onClick={() => navigate('/cart')}
 				>
 					장바구니
 				</button>
@@ -59,6 +62,7 @@ function PurchasePanel({ hongge }: PurchasePanelProps) {
 					className="border-2 border-brand-crab bg-brand-crab px-4 py-3 text-sm font-bold text-white hover:bg-brand-crab-dark disabled:border-[#b8c2c6] disabled:bg-[#b8c2c6]"
 					type="button"
 					disabled={soldOut}
+					onClick={() => navigate('/checkout')}
 				>
 					{soldOut ? '품절' : '구매하기'}
 				</button>
