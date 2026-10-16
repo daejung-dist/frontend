@@ -78,7 +78,6 @@ function AboutPage() {
 
 				<div className="mt-7 flex items-center justify-center gap-4 border-2 border-brand-crab bg-brand-crab px-4 py-3 text-center text-lg font-black text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.25)] max-[700px]:gap-2 max-[700px]:px-2 max-[700px]:text-sm">
 					<span>고객님의 신뢰를 최고의 신선함으로 보답하겠습니다!</span>
-					<span className="border-2 border-brand-sun bg-brand-sun px-2 py-1 text-xs text-black">토요일 휴무</span>
 				</div>
 
 				<div className="mt-5 border border-[#c3cbce] bg-[#f7f8f6] px-5 py-4 text-center text-xs leading-5 text-[#606b70] max-[700px]:px-3">

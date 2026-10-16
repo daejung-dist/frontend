@@ -69,10 +69,6 @@ function LoginPage() {
 			<div className="w-full max-w-[460px] border-2 border-[#aeb9bd] bg-white p-1 shadow-[inset_0_0_0_1px_white,0_1px_3px_rgba(0,0,0,0.2)]">
 				<div className="border border-[#8e999d] bg-[#f8f8f6] px-7 py-8 shadow-[inset_0_1px_0_white] max-[700px]:px-4 max-[700px]:py-6">
 					<div className="text-center">
-						<div className="mx-auto mb-4 flex size-12 items-center justify-center border-2 border-brand-ocean bg-brand-sky text-brand-ocean-deep shadow-[inset_0_0_0_1px_white]">
-							<LockKeyhole aria-hidden="true" size={24} strokeWidth={2.5} />
-						</div>
-						<p className="mx-auto w-fit bg-brand-crab px-3 py-1 text-xs font-black text-white">회원 전용</p>
 						<h1 className="mt-3 text-2xl font-black tracking-[-1px] text-black max-[700px]:text-xl" id="login-title">로그인</h1>
 						<p className="mt-2 text-xs leading-5 text-[#606b70]">대정유통 회원이시면 로그인 후 이용해 주세요.</p>
 						<div className="mx-auto mt-4 h-1 w-24 bg-brand-sun" />
