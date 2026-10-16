@@ -1,7 +1,6 @@
 import { isAxiosError } from 'axios'
-import { LockKeyhole } from 'lucide-react'
 import { useEffect, useState, type FormEvent } from 'react'
-import { Link, useNavigate } from 'react-router'
+import { Link, useLocation, useNavigate } from 'react-router'
 
 import { login } from '@/features/auth/api/auth'
 import { useAuthStore } from '@/features/auth/stores/authStore'
@@ -9,9 +8,20 @@ import { useAuthStore } from '@/features/auth/stores/authStore'
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 function LoginPage() {
+	const location = useLocation()
 	const navigate = useNavigate()
 	const isAuthenticated = useAuthStore((state) => state.isAuthenticated)
 	const setAuth = useAuthStore((state) => state.setAuth)
+	const from = (location.state as {
+		from?: {
+			pathname?: string
+			search?: string
+			hash?: string
+		}
+	} | null)?.from
+	const redirectTo = from
+		? `${from.pathname ?? '/'}${from.search ?? ''}${from.hash ?? ''}`
+		: '/'
 
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
@@ -20,9 +30,9 @@ function LoginPage() {
 
 	useEffect(() => {
 		if (isAuthenticated) {
-			navigate('/', { replace: true })
+			navigate(redirectTo, { replace: true })
 		}
-	}, [isAuthenticated, navigate])
+	}, [isAuthenticated, navigate, redirectTo])
 
 	const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
@@ -51,7 +61,7 @@ function LoginPage() {
 
 			const { accessToken, ...user } = response
 			setAuth(accessToken, user)
-			navigate('/', { replace: true })
+			navigate(redirectTo, { replace: true })
 		} catch (error) {
 			if (isAxiosError(error)) {
 				const message = (error.response?.data as { message?: string } | undefined)?.message
