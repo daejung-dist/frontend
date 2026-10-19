@@ -71,7 +71,7 @@ function Header() {
 				</div>
 			</div>
 
-			<div className="relative mx-auto flex h-23.5 w-240 items-center border-x border-[#d5dfe3] bg-white px-2 shadow-[inset_0_-1px_0_#edf2f4] max-[700px]:h-16 max-[700px]:w-[calc(100%-32px)] max-[700px]:border-0 max-[700px]:px-0">
+			<div className="relative mx-auto flex h-23.5 w-240 items-center bg-white px-2 shadow-[inset_0_-1px_0_#edf2f4] max-[700px]:h-16 max-[700px]:w-[calc(100%-32px)] max-[700px]:border-0 max-[700px]:px-0">
 				<div className="w-39 border-2 border-[#bfc7ca] bg-[#fafafa] py-1.5 text-center text-[11px] leading-[1.35] shadow-[inset_0_0_0_1px_white] max-[700px]:hidden">
 					<p className="text-flash-sun font-bold text-brand-ocean">수협</p>
 					<p className="font-semibold text-black">수협 654-61-021772</p>
