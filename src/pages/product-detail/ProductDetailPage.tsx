@@ -10,7 +10,10 @@ function ProductDetailPage() {
 
 	return (
 		<section className="mx-auto w-240 px-3 py-8 max-[700px]:w-full max-[700px]:px-4 max-[700px]:py-6">
-			<Link className="mb-4 inline-flex items-center gap-1 text-sm font-bold text-brand-ocean-deep hover:underline" to="/">
+			<Link
+				className="mb-4 inline-flex items-center gap-1 text-sm font-bold text-brand-ocean-deep hover:underline"
+				to="/"
+			>
 				<ArrowLeft aria-hidden="true" size={16} />
 				홈으로
 			</Link>
@@ -27,7 +30,9 @@ function ProductDetailPage() {
 					/>
 					<div className="flex flex-col">
 						<h1 className="text-2xl font-black text-black max-[700px]:text-xl">{hongge.name}</h1>
-						<strong className="mt-3 text-3xl font-black text-brand-crab max-[700px]:text-2xl">{hongge.price.toLocaleString()}원</strong>
+						<strong className="mt-3 text-3xl font-black text-brand-crab max-[700px]:text-2xl">
+							{hongge.price.toLocaleString()}원
+						</strong>
 						<dl className="mt-5 border-y border-[#c3cbce] py-3 text-sm">
 							<div className="flex gap-4">
 								<dt className="w-16 font-bold text-[#606b70]">재고</dt>

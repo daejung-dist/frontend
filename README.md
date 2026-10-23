@@ -54,11 +54,11 @@ npm run dev
 
 ## 사용 가능한 스크립트
 
-| 명령어 | 설명 |
-| --- | --- |
-| `npm run dev` | Vite 개발 서버 실행 및 HMR 제공 |
-| `npm run build` | TypeScript 검사 후 프로덕션 빌드 |
-| `npm run lint` | ESLint 정적 검사 |
+| 명령어            | 설명                             |
+| ----------------- | -------------------------------- |
+| `npm run dev`     | Vite 개발 서버 실행 및 HMR 제공  |
+| `npm run build`   | TypeScript 검사 후 프로덕션 빌드 |
+| `npm run lint`    | ESLint 정적 검사                 |
 | `npm run preview` | 프로덕션 빌드 결과 로컬 미리보기 |
 
 ## 프로젝트 구조
@@ -112,4 +112,3 @@ feature/* 또는 fix/* -> develop -> main
 - `develop`: 개발 통합 브랜치
 - `feature/*`: 신규 기능 개발
 - `fix/*`: 버그 수정
-

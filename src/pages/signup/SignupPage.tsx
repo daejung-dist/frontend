@@ -38,11 +38,7 @@ function SignupPage() {
 	const navigate = useNavigate()
 	const setAuth = useAuthStore((state) => state.setAuth)
 	const detailAddressRef = useRef<HTMLInputElement>(null)
-	const {
-		openPostcode,
-		isLoading: isPostcodeLoading,
-		errorMessage: postcodeErrorMessage,
-	} = useDaumPostcode()
+	const { openPostcode, isLoading: isPostcodeLoading, errorMessage: postcodeErrorMessage } = useDaumPostcode()
 
 	const [form, setForm] = useState<SignupForm>(INITIAL_FORM)
 	const [isSubmitting, setIsSubmitting] = useState(false)
@@ -75,9 +71,8 @@ function SignupPage() {
 
 	const handleAddressSearch = () => {
 		void openPostcode((data) => {
-			const address = data.userSelectedType === 'R'
-				? data.roadAddress || data.jibunAddress
-				: data.jibunAddress || data.roadAddress
+			const address =
+				data.userSelectedType === 'R' ? data.roadAddress || data.jibunAddress : data.jibunAddress || data.roadAddress
 
 			setForm((prev) => ({
 				...prev,
@@ -104,11 +99,9 @@ function SignupPage() {
 		setSuccessMessage('')
 
 		try {
-			const defaultShippingAddress = [
-				`[${form.zonecode}]`,
-				form.address,
-				form.detailAddress.trim(),
-			].filter(Boolean).join(' ')
+			const defaultShippingAddress = [`[${form.zonecode}]`, form.address, form.detailAddress.trim()]
+				.filter(Boolean)
+				.join(' ')
 
 			const response = await signup({
 				email: form.email.trim(),
@@ -138,18 +131,25 @@ function SignupPage() {
 	}
 
 	return (
-		<section className="mx-auto flex w-240 items-center justify-center px-3 py-12 max-[700px]:w-full max-[700px]:px-4 max-[700px]:py-8" aria-labelledby="signup-title">
+		<section
+			className="mx-auto flex w-240 items-center justify-center px-3 py-12 max-[700px]:w-full max-[700px]:px-4 max-[700px]:py-8"
+			aria-labelledby="signup-title"
+		>
 			<div className="w-full max-w-[500px] border-2 border-[#aeb9bd] bg-white p-1 shadow-[inset_0_0_0_1px_white,0_1px_3px_rgba(0,0,0,0.2)]">
 				<div className="border border-[#8e999d] bg-[#f8f8f6] px-7 py-8 shadow-[inset_0_1px_0_white] max-[700px]:px-4 max-[700px]:py-6">
 					<div className="text-center">
-						<h1 className="mt-3 text-2xl font-black tracking-[-1px] text-black max-[700px]:text-xl" id="signup-title">회원가입</h1>
+						<h1 className="mt-3 text-2xl font-black tracking-[-1px] text-black max-[700px]:text-xl" id="signup-title">
+							회원가입
+						</h1>
 						<p className="mt-2 text-xs leading-5 text-[#606b70]">아래 정보를 입력해 회원가입을 완료해 주세요.</p>
 						<div className="mx-auto mt-4 h-1 w-24 bg-brand-sun" />
 					</div>
 
 					<form className="mt-6" noValidate onSubmit={handleSubmit}>
 						<div className="flex flex-col gap-1">
-							<label className="text-xs font-bold text-[#49545a]" htmlFor="signup-email">이메일</label>
+							<label className="text-xs font-bold text-[#49545a]" htmlFor="signup-email">
+								이메일
+							</label>
 							<input
 								className="h-10 border border-[#9da9ad] bg-white px-3 text-sm shadow-[inset_1px_1px_0_#e4e9eb] outline-none focus:border-brand-ocean focus:shadow-[inset_0_0_0_1px_var(--brand-sky)]"
 								id="signup-email"
@@ -163,7 +163,9 @@ function SignupPage() {
 						</div>
 
 						<div className="mt-3 flex flex-col gap-1">
-							<label className="text-xs font-bold text-[#49545a]" htmlFor="signup-password">비밀번호</label>
+							<label className="text-xs font-bold text-[#49545a]" htmlFor="signup-password">
+								비밀번호
+							</label>
 							<input
 								className="h-10 border border-[#9da9ad] bg-white px-3 text-sm shadow-[inset_1px_1px_0_#e4e9eb] outline-none focus:border-brand-ocean focus:shadow-[inset_0_0_0_1px_var(--brand-sky)]"
 								id="signup-password"
@@ -177,7 +179,9 @@ function SignupPage() {
 						</div>
 
 						<div className="mt-3 flex flex-col gap-1">
-							<label className="text-xs font-bold text-[#49545a]" htmlFor="signup-name">이름</label>
+							<label className="text-xs font-bold text-[#49545a]" htmlFor="signup-name">
+								이름
+							</label>
 							<input
 								className="h-10 border border-[#9da9ad] bg-white px-3 text-sm shadow-[inset_1px_1px_0_#e4e9eb] outline-none focus:border-brand-ocean focus:shadow-[inset_0_0_0_1px_var(--brand-sky)]"
 								id="signup-name"
@@ -191,7 +195,9 @@ function SignupPage() {
 						</div>
 
 						<div className="mt-3 flex flex-col gap-1">
-							<label className="text-xs font-bold text-[#49545a]" htmlFor="signup-phone-number">휴대폰 번호</label>
+							<label className="text-xs font-bold text-[#49545a]" htmlFor="signup-phone-number">
+								휴대폰 번호
+							</label>
 							<input
 								className="h-10 border border-[#9da9ad] bg-white px-3 text-sm shadow-[inset_1px_1px_0_#e4e9eb] outline-none focus:border-brand-ocean focus:shadow-[inset_0_0_0_1px_var(--brand-sky)]"
 								id="signup-phone-number"
@@ -208,7 +214,9 @@ function SignupPage() {
 						<div className="mt-3">
 							<p className="text-xs font-bold text-[#49545a]">기본 배송지 주소</p>
 							<div className="mt-1 flex gap-2">
-								<label className="sr-only" htmlFor="signup-zonecode">우편번호</label>
+								<label className="sr-only" htmlFor="signup-zonecode">
+									우편번호
+								</label>
 								<input
 									className="h-10 min-w-0 flex-1 border border-[#9da9ad] bg-[#f1f3f4] px-3 text-sm text-[#49545a] shadow-[inset_1px_1px_0_#e4e9eb] outline-none"
 									id="signup-zonecode"
@@ -228,7 +236,9 @@ function SignupPage() {
 								</button>
 							</div>
 
-							<label className="sr-only" htmlFor="signup-address">기본 주소</label>
+							<label className="sr-only" htmlFor="signup-address">
+								기본 주소
+							</label>
 							<input
 								className="mt-2 h-10 w-full border border-[#9da9ad] bg-[#f1f3f4] px-3 text-sm text-[#49545a] shadow-[inset_1px_1px_0_#e4e9eb] outline-none"
 								id="signup-address"
@@ -239,7 +249,9 @@ function SignupPage() {
 								readOnly
 							/>
 
-							<label className="sr-only" htmlFor="signup-detail-address">상세주소</label>
+							<label className="sr-only" htmlFor="signup-detail-address">
+								상세주소
+							</label>
 							<input
 								className="mt-2 h-10 w-full border border-[#9da9ad] bg-white px-3 text-sm shadow-[inset_1px_1px_0_#e4e9eb] outline-none focus:border-brand-ocean focus:shadow-[inset_0_0_0_1px_var(--brand-sky)]"
 								id="signup-detail-address"
@@ -261,7 +273,9 @@ function SignupPage() {
 
 						<div className="mt-3 grid grid-cols-2 gap-3 max-[460px]:grid-cols-1">
 							<div className="flex flex-col gap-1">
-								<label className="text-xs font-bold text-[#49545a]" htmlFor="signup-birth-date">생년월일</label>
+								<label className="text-xs font-bold text-[#49545a]" htmlFor="signup-birth-date">
+									생년월일
+								</label>
 								<input
 									className="h-10 border border-[#9da9ad] bg-white px-3 text-sm shadow-[inset_1px_1px_0_#e4e9eb] outline-none focus:border-brand-ocean focus:shadow-[inset_0_0_0_1px_var(--brand-sky)]"
 									id="signup-birth-date"
@@ -274,7 +288,9 @@ function SignupPage() {
 							</div>
 
 							<div className="flex flex-col gap-1">
-								<label className="text-xs font-bold text-[#49545a]" htmlFor="signup-gender">성별</label>
+								<label className="text-xs font-bold text-[#49545a]" htmlFor="signup-gender">
+									성별
+								</label>
 								<select
 									className="h-10 border border-[#9da9ad] bg-white px-3 text-sm shadow-[inset_1px_1px_0_#e4e9eb] outline-none focus:border-brand-ocean focus:shadow-[inset_0_0_0_1px_var(--brand-sky)]"
 									id="signup-gender"
@@ -291,12 +307,18 @@ function SignupPage() {
 						</div>
 
 						{errorMessage && (
-							<p className="mt-3 border border-brand-crab bg-[#fdf0ef] px-3 py-2 text-xs font-bold text-brand-crab" role="alert">
+							<p
+								className="mt-3 border border-brand-crab bg-[#fdf0ef] px-3 py-2 text-xs font-bold text-brand-crab"
+								role="alert"
+							>
 								{errorMessage}
 							</p>
 						)}
 						{successMessage && (
-							<p className="mt-3 border border-brand-fresh bg-[#edf8ef] px-3 py-2 text-xs font-bold text-state-success" role="status">
+							<p
+								className="mt-3 border border-brand-fresh bg-[#edf8ef] px-3 py-2 text-xs font-bold text-state-success"
+								role="status"
+							>
 								{successMessage}
 							</p>
 						)}
@@ -312,7 +334,9 @@ function SignupPage() {
 
 					<div className="mt-5 border-t border-[#d5dfe3] pt-4 text-center text-xs text-[#606b70]">
 						이미 계정이 있으신가요?
-						<Link className="ml-1.5 font-bold text-brand-ocean-deep underline hover:text-brand-crab" to="/login">로그인</Link>
+						<Link className="ml-1.5 font-bold text-brand-ocean-deep underline hover:text-brand-crab" to="/login">
+							로그인
+						</Link>
 					</div>
 				</div>
 			</div>

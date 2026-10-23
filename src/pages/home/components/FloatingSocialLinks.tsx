@@ -31,12 +31,7 @@ function FloatingSocialLinks() {
 					rel="noreferrer"
 					aria-label={`${name} 새 창에서 열기`}
 				>
-					<img
-						className="size-12 object-contain max-[700px]:size-10"
-						src={icon}
-						alt=""
-						aria-hidden="true"
-					/>
+					<img className="size-12 object-contain max-[700px]:size-10" src={icon} alt="" aria-hidden="true" />
 					<span className="mt-2 text-[11px] font-black leading-4 text-[#273848] max-[700px]:mt-1.5 max-[700px]:text-[9px]">
 						{name}
 					</span>

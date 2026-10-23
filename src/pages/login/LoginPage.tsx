@@ -12,16 +12,16 @@ function LoginPage() {
 	const navigate = useNavigate()
 	const isAuthenticated = useAuthStore((state) => state.isAuthenticated)
 	const setAuth = useAuthStore((state) => state.setAuth)
-	const from = (location.state as {
-		from?: {
-			pathname?: string
-			search?: string
-			hash?: string
-		}
-	} | null)?.from
-	const redirectTo = from
-		? `${from.pathname ?? '/'}${from.search ?? ''}${from.hash ?? ''}`
-		: '/'
+	const from = (
+		location.state as {
+			from?: {
+				pathname?: string
+				search?: string
+				hash?: string
+			}
+		} | null
+	)?.from
+	const redirectTo = from ? `${from.pathname ?? '/'}${from.search ?? ''}${from.hash ?? ''}` : '/'
 
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
@@ -75,18 +75,25 @@ function LoginPage() {
 	}
 
 	return (
-		<section className="mx-auto flex w-240 items-center justify-center px-3 py-12 max-[700px]:w-full max-[700px]:px-4 max-[700px]:py-8" aria-labelledby="login-title">
+		<section
+			className="mx-auto flex w-240 items-center justify-center px-3 py-12 max-[700px]:w-full max-[700px]:px-4 max-[700px]:py-8"
+			aria-labelledby="login-title"
+		>
 			<div className="w-full max-w-[460px] border-2 border-[#aeb9bd] bg-white p-1 shadow-[inset_0_0_0_1px_white,0_1px_3px_rgba(0,0,0,0.2)]">
 				<div className="border border-[#8e999d] bg-[#f8f8f6] px-7 py-8 shadow-[inset_0_1px_0_white] max-[700px]:px-4 max-[700px]:py-6">
 					<div className="text-center">
-						<h1 className="mt-3 text-2xl font-black tracking-[-1px] text-black max-[700px]:text-xl" id="login-title">로그인</h1>
+						<h1 className="mt-3 text-2xl font-black tracking-[-1px] text-black max-[700px]:text-xl" id="login-title">
+							로그인
+						</h1>
 						<p className="mt-2 text-xs leading-5 text-[#606b70]">대정유통 회원이시면 로그인 후 이용해 주세요.</p>
 						<div className="mx-auto mt-4 h-1 w-24 bg-brand-sun" />
 					</div>
 
 					<form className="mt-6" noValidate onSubmit={handleSubmit}>
 						<div className="flex flex-col gap-1">
-							<label className="text-xs font-bold text-[#49545a]" htmlFor="login-email">이메일</label>
+							<label className="text-xs font-bold text-[#49545a]" htmlFor="login-email">
+								이메일
+							</label>
 							<input
 								id="login-email"
 								type="email"
@@ -100,7 +107,9 @@ function LoginPage() {
 						</div>
 
 						<div className="mt-3 flex flex-col gap-1">
-							<label className="text-xs font-bold text-[#49545a]" htmlFor="login-password">비밀번호</label>
+							<label className="text-xs font-bold text-[#49545a]" htmlFor="login-password">
+								비밀번호
+							</label>
 							<input
 								id="login-password"
 								type="password"
@@ -114,7 +123,10 @@ function LoginPage() {
 						</div>
 
 						{errorMessage && (
-							<p className="mt-3 border border-brand-crab bg-[#fdf0ef] px-3 py-2 text-xs font-bold text-brand-crab" role="alert">
+							<p
+								className="mt-3 border border-brand-crab bg-[#fdf0ef] px-3 py-2 text-xs font-bold text-brand-crab"
+								role="alert"
+							>
 								{errorMessage}
 							</p>
 						)}
@@ -130,7 +142,9 @@ function LoginPage() {
 
 					<div className="mt-5 border-t border-[#d5dfe3] pt-4 text-center text-xs text-[#606b70]">
 						아직 회원이 아니신가요?
-						<Link className="ml-1.5 font-bold text-brand-ocean-deep underline hover:text-brand-crab" to="/signup">회원가입</Link>
+						<Link className="ml-1.5 font-bold text-brand-ocean-deep underline hover:text-brand-crab" to="/signup">
+							회원가입
+						</Link>
 					</div>
 				</div>
 			</div>
