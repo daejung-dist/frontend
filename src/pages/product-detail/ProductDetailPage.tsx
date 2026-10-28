@@ -9,7 +9,7 @@ function ProductDetailPage() {
 	const { data: hongge, isPending, isError } = useHongge(Number(id))
 
 	return (
-		<section className="mx-auto w-240 px-3 py-8 max-[700px]:w-full max-[700px]:px-4 max-[700px]:py-6">
+		<section className="py-8 max-[700px]:py-6">
 			<Link
 				className="mb-4 inline-flex items-center gap-1 text-sm font-bold text-brand-ocean-deep hover:underline"
 				to="/"

@@ -6,7 +6,7 @@ function ProductListPage() {
 
 	return (
 		<section
-			className="mx-auto w-240 border-x border-[#d5dfe3] bg-white px-3 pt-8 pb-12 shadow-[inset_0_1px_0_white] max-[700px]:w-[calc(100%-28px)] max-[700px]:border-0 max-[700px]:px-0 max-[700px]:pt-6"
+			className="border-x border-[#d5dfe3] bg-white px-3 pt-8 pb-12 shadow-[inset_0_1px_0_white] max-[700px]:border-0 max-[700px]:px-0 max-[700px]:pt-6"
 			aria-labelledby="product-list-title"
 		>
 			<div className="mb-3 flex items-end justify-between border-b-2 border-brand-ocean bg-[#f3f6f7] px-3 py-2 shadow-[inset_0_1px_0_white]">

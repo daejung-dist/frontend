@@ -29,7 +29,7 @@ const promises = [
 function AboutPage() {
 	return (
 		<section
-			className="mx-auto w-240 border-x border-[#d5dfe3] bg-white shadow-[inset_0_1px_0_white] max-[700px]:w-full max-[700px]:border-0"
+			className="border-x border-[#d5dfe3] bg-white shadow-[inset_0_1px_0_white] max-[700px]:border-0"
 			aria-labelledby="about-title"
 		>
 			<div className="border-b-2 border-brand-ocean-deep bg-brand-ocean px-4 py-2 text-center text-sm font-black text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.3)] max-[700px]:text-xs">

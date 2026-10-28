@@ -131,10 +131,7 @@ function SignupPage() {
 	}
 
 	return (
-		<section
-			className="mx-auto flex w-240 items-center justify-center px-3 py-12 max-[700px]:w-full max-[700px]:px-4 max-[700px]:py-8"
-			aria-labelledby="signup-title"
-		>
+		<section className="flex items-center justify-center py-12 max-[700px]:py-8" aria-labelledby="signup-title">
 			<div className="w-full max-w-[500px] border-2 border-[#aeb9bd] bg-white p-1 shadow-[inset_0_0_0_1px_white,0_1px_3px_rgba(0,0,0,0.2)]">
 				<div className="border border-[#8e999d] bg-[#f8f8f6] px-7 py-8 shadow-[inset_0_1px_0_white] max-[700px]:px-4 max-[700px]:py-6">
 					<div className="text-center">

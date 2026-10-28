@@ -34,7 +34,7 @@ function Header() {
 	return (
 		<header className="bg-white">
 			<div className="h-7 border-y border-brand-ocean-deep bg-brand-ocean text-[11px] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35)] max-[700px]:h-auto">
-				<div className="mx-auto flex h-full w-240 items-center justify-between max-[700px]:w-[calc(100%-32px)] max-[700px]:flex-col max-[700px]:items-start max-[700px]:gap-1 max-[700px]:py-1.5">
+				<div className="page-container flex h-full items-center justify-between max-[700px]:flex-col max-[700px]:items-start max-[700px]:gap-1 max-[700px]:py-1.5">
 					<span className="font-bold max-[700px]:text-[10px]">
 						[대정유통] 후포리 명품 홍게 - 산지의 맛을 전합니다. <span className="text-brand-sun">전상품 무료배송!</span>
 					</span>
@@ -82,7 +82,7 @@ function Header() {
 				</div>
 			</div>
 
-			<div className="relative mx-auto flex h-23.5 w-240 items-center bg-white px-2 shadow-[inset_0_-1px_0_#edf2f4] max-[700px]:h-16 max-[700px]:w-[calc(100%-32px)] max-[700px]:border-0 max-[700px]:px-0">
+			<div className="page-container relative flex h-23.5 items-center bg-white shadow-[inset_0_-1px_0_#edf2f4] max-[700px]:h-16 max-[700px]:border-0">
 				<div className="w-39 border-2 border-[#bfc7ca] bg-[#fafafa] py-1.5 text-center text-[11px] leading-[1.35] shadow-[inset_0_0_0_1px_white] max-[700px]:hidden">
 					<p className="text-flash-sun font-bold text-brand-ocean">수협</p>
 					<p className="font-semibold text-black">수협 654-61-021772</p>
@@ -149,7 +149,7 @@ function Header() {
 			</div>
 
 			<div className="hidden border-y border-brand-ocean-deep/15 bg-surface-muted max-[700px]:flex">
-				<div className="flex w-full items-center justify-between gap-3 px-4 py-2 text-[10px] text-text-primary">
+				<div className="page-container flex items-center justify-between gap-3 py-2 text-[10px] text-text-primary">
 					<p className="whitespace-nowrap">
 						<span className="text-flash-sun font-bold text-brand-ocean">수협</span> 654-61-021772 (예금주: 안덕준)
 					</p>

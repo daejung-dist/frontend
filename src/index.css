@@ -46,6 +46,14 @@
 	--color-state-danger: var(--state-danger);
 }
 
+/* header·nav·main·footer가 같은 좌우 여백을 갖도록 공통으로 쓴다 */
+@utility page-container {
+	width: 100%;
+	max-width: calc(960px + 2 * 16px);
+	margin-inline: auto;
+	padding-inline: 16px;
+}
+
 @keyframes text-flash-sun {
 	50% {
 		color: var(--brand-sun);

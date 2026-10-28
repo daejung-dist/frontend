@@ -17,7 +17,7 @@ const benefits = [
 
 function InfoSection() {
 	return (
-		<section className="mx-auto w-240 border-x border-[#d5dfe3] bg-white px-3 pt-8 pb-12 max-[700px]:w-[calc(100%-28px)] max-[700px]:border-0 max-[700px]:px-0 max-[700px]:pt-6">
+		<section className="border-x border-[#d5dfe3] bg-white px-3 pt-8 pb-12 max-[700px]:border-0 max-[700px]:px-0 max-[700px]:pt-6">
 			<div className="relative overflow-hidden border border-[#dedbd4] bg-[#fffefa] shadow-[0_4px_14px_rgba(67,54,37,0.16)]">
 				<div className="relative z-10 min-h-[330px] px-12 pt-10 pb-16 max-[700px]:min-h-0 max-[700px]:px-6 max-[700px]:pt-7 max-[700px]:pb-14">
 					<div className="pr-28 max-[700px]:pr-16">

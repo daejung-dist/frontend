@@ -9,7 +9,7 @@ function ProtectedRoute() {
 
 	if (isBootstrapping) {
 		return (
-			<section className="mx-auto w-240 px-3 py-16 text-center max-[700px]:w-full max-[700px]:px-4">
+			<section className="py-16 text-center">
 				<p className="text-sm font-bold text-[#606b70]" role="status">
 					로그인 상태를 확인하고 있습니다.
 				</p>

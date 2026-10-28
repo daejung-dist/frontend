@@ -4,7 +4,7 @@ import { Link } from 'react-router'
 function NotFoundPage() {
 	return (
 		<section
-			className="mx-auto flex min-h-[520px] w-240 items-center justify-center px-3 py-12 max-[700px]:min-h-[430px] max-[700px]:w-full max-[700px]:px-4"
+			className="page-container flex min-h-[520px] items-center justify-center py-12 max-[700px]:min-h-[430px]"
 			aria-labelledby="not-found-title"
 		>
 			<div className="w-full max-w-[620px] border-2 border-[#aeb9bd] bg-white p-1 shadow-[inset_0_0_0_1px_white,0_1px_3px_rgba(0,0,0,0.2)]">

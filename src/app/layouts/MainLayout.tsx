@@ -11,7 +11,9 @@ function MainLayout() {
 			<Navigation />
 
 			<main className="min-h-130 max-[700px]:min-h-105">
-				<Outlet />
+				<div className="page-container">
+					<Outlet />
+				</div>
 			</main>
 
 			<Footer />
