@@ -4,7 +4,6 @@ import { NavLink } from 'react-router'
 
 import { logout } from '@/features/auth/api/auth'
 import { useAuthStore } from '@/features/auth/stores/authStore'
-import Navigation from '@/shared/components/common/Navigation'
 
 function Header() {
 	const user = useAuthStore((state) => state.user)
@@ -33,7 +32,7 @@ function Header() {
 	}
 
 	return (
-		<header className="border-b-2 border-[#7faabd] bg-white">
+		<header className="bg-white">
 			<div className="h-7 border-y border-brand-ocean-deep bg-brand-ocean text-[11px] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35)] max-[700px]:h-auto">
 				<div className="mx-auto flex h-full w-240 items-center justify-between max-[700px]:w-[calc(100%-32px)] max-[700px]:flex-col max-[700px]:items-start max-[700px]:gap-1 max-[700px]:py-1.5">
 					<span className="font-bold max-[700px]:text-[10px]">
@@ -159,8 +158,6 @@ function Header() {
 					</p>
 				</div>
 			</div>
-
-			<Navigation />
 		</header>
 	)
 }
