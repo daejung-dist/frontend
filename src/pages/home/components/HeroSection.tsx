@@ -70,18 +70,21 @@ function HeroSection() {
 				src={HERO_IMAGES[activeImageIndex]}
 				alt={`대정유통 배너 이미지 ${activeImageIndex + 1} / ${HERO_IMAGES.length}`}
 			/>
-			<div className="absolute top-1/2 left-8 -translate-y-1/2 max-[700px]:left-4">
-				<h2 className="mt-2 text-[42px] font-black leading-[1.2] tracking-[-2px] text-brand-crab [-webkit-text-stroke:4px_white] [paint-order:stroke_fill] max-[700px]:text-[28px]">
-					후포 수협 69번 중매인이 선별한
-					<br />
+			<div className="absolute inset-y-1 left-1 flex w-[45%] flex-col items-start justify-center pl-10 text-left max-[700px]:inset-y-0 max-[700px]:left-0 max-[700px]:w-[70%] max-[700px]:pl-5">
+				<p className="rounded-sm bg-brand-crab px-4 py-1 text-xl font-black tracking-[-1px] text-white max-[700px]:px-2.5 max-[700px]:text-sm">
 					산지직송 당일배송
-				</h2>
-				<p className="mt-2 text-2xl font-black tracking-[-1px] text-black [-webkit-text-stroke:4px_white] [paint-order:stroke_fill] max-[700px]:text-lg">
-					100% 품질보장 자연산 홍게
 				</p>
+				<p className="mt-3 bg-brand-sun px-4 py-1 text-xl font-black tracking-[-1px] text-black max-[700px]:mt-2 max-[700px]:px-2 max-[700px]:text-[11px]">
+					후포 수협 69번 중매인이 선별한
+				</p>
+				<h2 className="mt-4 text-[46px] font-black leading-tight tracking-[-2px] text-black [-webkit-text-stroke:6px_white] [paint-order:stroke_fill] max-[700px]:mt-2.5 max-[700px]:text-2xl max-[700px]:[-webkit-text-stroke:4px_white]">
+					100% 품질보장
+					<br />
+					자연산 홍게
+				</h2>
 			</div>
 
-			{/* 좌측 문구와 겹치지 않도록 컨트롤은 하단 중앙에 모은다 */}
+			{/* 문구와 겹치지 않도록 컨트롤은 하단 중앙에 모은다 */}
 			<div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 items-center gap-3 max-[700px]:bottom-3">
 				<button className={controlButtonClassName} type="button" aria-label="이전 배너" onClick={showPrevImage}>
 					‹
