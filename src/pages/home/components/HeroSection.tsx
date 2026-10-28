@@ -1,30 +1,74 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import type { TouchEvent } from 'react'
 
 import heroCalamari from '@/shared/assets/images/banners/hero-calamari.jpg'
 import heroCrab from '@/shared/assets/images/banners/hero-crab.jpg'
 
+const HERO_IMAGES = [heroCrab, heroCalamari]
+const AUTO_SLIDE_DELAY = 5000
+const SWIPE_THRESHOLD = 50
+
+const controlButtonClassName =
+	'flex size-8 items-center justify-center rounded-full bg-black/40 text-lg leading-none text-white hover:bg-black/60 max-[700px]:size-7'
+
 function HeroSection() {
 	const [activeImageIndex, setActiveImageIndex] = useState(0)
-	const heroImages = [heroCrab, heroCalamari]
+	const touchStartRef = useRef<{ x: number; y: number } | null>(null)
 
+	// 수동으로 넘겼을 때 바로 다시 넘어가지 않도록 인덱스가 바뀔 때마다 타이머를 새로 건다
 	useEffect(() => {
-		const intervalId = window.setInterval(() => {
-			setActiveImageIndex((currentIndex) => (currentIndex + 1) % heroImages.length)
-		}, 3000)
+		const timeoutId = window.setTimeout(() => {
+			setActiveImageIndex((currentIndex) => (currentIndex + 1) % HERO_IMAGES.length)
+		}, AUTO_SLIDE_DELAY)
 
-		return () => window.clearInterval(intervalId)
-	}, [heroImages.length])
+		return () => window.clearTimeout(timeoutId)
+	}, [activeImageIndex])
+
+	const showPrevImage = () => {
+		setActiveImageIndex((currentIndex) => (currentIndex - 1 + HERO_IMAGES.length) % HERO_IMAGES.length)
+	}
+
+	const showNextImage = () => {
+		setActiveImageIndex((currentIndex) => (currentIndex + 1) % HERO_IMAGES.length)
+	}
+
+	const handleTouchStart = (event: TouchEvent<HTMLElement>) => {
+		const touch = event.touches[0]
+		touchStartRef.current = { x: touch.clientX, y: touch.clientY }
+	}
+
+	const handleTouchEnd = (event: TouchEvent<HTMLElement>) => {
+		const touchStart = touchStartRef.current
+		touchStartRef.current = null
+		if (!touchStart) return
+
+		const touch = event.changedTouches[0]
+		const deltaX = touch.clientX - touchStart.x
+		const deltaY = touch.clientY - touchStart.y
+
+		// 세로 스크롤하다 살짝 옆으로 밀린 경우는 넘기지 않는다
+		if (Math.abs(deltaX) < SWIPE_THRESHOLD || Math.abs(deltaX) < Math.abs(deltaY)) return
+
+		if (deltaX < 0) {
+			showNextImage()
+		} else {
+			showPrevImage()
+		}
+	}
 
 	return (
 		<section
-			className="relative min-h-[440px] overflow-hidden border-2 border-[#aeb9bd] bg-[#f1f1ee] p-1 shadow-[inset_0_0_0_1px_white,0_1px_3px_rgba(0,0,0,0.2)] max-[700px]:min-h-[330px] max-[700px]:p-0"
+			className="relative min-h-[440px] overflow-hidden border-2 border-[#aeb9bd] bg-[#f1f1ee] p-1 shadow-[inset_0_0_0_1px_white,0_1px_3px_rgba(0,0,0,0.2)] max-[700px]:min-h-[330px] max-[700px]:p-0 touch-pan-y"
 			aria-label="대정유통 대표 상품"
+			aria-roledescription="carousel"
+			onTouchStart={handleTouchStart}
+			onTouchEnd={handleTouchEnd}
 		>
 			<img
-				key={heroImages[activeImageIndex]}
+				key={HERO_IMAGES[activeImageIndex]}
 				className="block h-[432px] w-full animate-in border border-[#8e999d] fade-in duration-500 object-cover max-[700px]:h-[330px] max-[700px]:border-0"
-				src={heroImages[activeImageIndex]}
-				alt="대정유통 배너 이미지"
+				src={HERO_IMAGES[activeImageIndex]}
+				alt={`대정유통 배너 이미지 ${activeImageIndex + 1} / ${HERO_IMAGES.length}`}
 			/>
 			<div className="absolute top-1/2 left-8 -translate-y-1/2 max-[700px]:left-4">
 				<h2 className="mt-2 text-[42px] font-black leading-[1.2] tracking-[-2px] text-brand-crab [-webkit-text-stroke:4px_white] [paint-order:stroke_fill] max-[700px]:text-[28px]">
@@ -35,6 +79,30 @@ function HeroSection() {
 				<p className="mt-2 text-2xl font-black tracking-[-1px] text-black [-webkit-text-stroke:4px_white] [paint-order:stroke_fill] max-[700px]:text-lg">
 					100% 품질보장 자연산 홍게
 				</p>
+			</div>
+
+			{/* 좌측 문구와 겹치지 않도록 컨트롤은 하단 중앙에 모은다 */}
+			<div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 items-center gap-3 max-[700px]:bottom-3">
+				<button className={controlButtonClassName} type="button" aria-label="이전 배너" onClick={showPrevImage}>
+					‹
+				</button>
+				<div className="flex items-center gap-2">
+					{HERO_IMAGES.map((image, index) => (
+						<button
+							key={image}
+							className={`size-2.5 rounded-full border border-white transition-colors ${
+								index === activeImageIndex ? 'bg-white' : 'bg-white/30 hover:bg-white/60'
+							}`}
+							type="button"
+							aria-label={`${index + 1}번째 배너 보기`}
+							aria-current={index === activeImageIndex}
+							onClick={() => setActiveImageIndex(index)}
+						/>
+					))}
+				</div>
+				<button className={controlButtonClassName} type="button" aria-label="다음 배너" onClick={showNextImage}>
+					›
+				</button>
 			</div>
 		</section>
 	)
