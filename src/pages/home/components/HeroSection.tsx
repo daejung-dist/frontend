@@ -74,7 +74,7 @@ function HeroSection() {
 				<p className="rounded-sm bg-brand-crab px-4 py-1 text-xl font-black tracking-[-1px] text-white max-[700px]:px-2.5 max-[700px]:text-sm">
 					산지직송 당일배송
 				</p>
-				<p className="mt-3 bg-brand-sun px-4 py-1 text-xl font-black tracking-[-1px] text-black max-[700px]:mt-2 max-[700px]:px-2 max-[700px]:text-[11px]">
+				<p className="mt-3 bg-brand-crab px-4 py-1 text-xl font-black tracking-[-1px] text-white max-[700px]:mt-2 max-[700px]:px-2 max-[700px]:text-[11px]">
 					후포 수협 69번 중매인이 선별한
 				</p>
 				<h2 className="mt-4 text-[46px] font-black leading-tight tracking-[-2px] text-black [-webkit-text-stroke:6px_white] [paint-order:stroke_fill] max-[700px]:mt-2.5 max-[700px]:text-2xl max-[700px]:[-webkit-text-stroke:4px_white]">
