@@ -13,6 +13,8 @@ const HERO_IMAGES = [
 const AUTO_SLIDE_DELAY = 5000
 const SWIPE_THRESHOLD = 50
 
+const getIndexAfter = (index: number, offset: number) => (index + offset + HERO_IMAGES.length) % HERO_IMAGES.length
+
 const controlButtonClassName =
 	'flex size-8 items-center justify-center rounded-full bg-black/40 text-lg leading-none text-white hover:bg-black/60 max-[700px]:size-7'
 
@@ -28,7 +30,7 @@ function HeroSection() {
 		if (isPaused) return
 
 		const timeoutId = window.setTimeout(() => {
-			setActiveImageIndex((currentIndex) => (currentIndex + 1) % HERO_IMAGES.length)
+			setActiveImageIndex((currentIndex) => getIndexAfter(currentIndex, 1))
 		}, AUTO_SLIDE_DELAY)
 
 		return () => window.clearTimeout(timeoutId)
@@ -44,11 +46,11 @@ function HeroSection() {
 	}
 
 	const showPrevImage = () => {
-		setActiveImageIndex((currentIndex) => (currentIndex - 1 + HERO_IMAGES.length) % HERO_IMAGES.length)
+		setActiveImageIndex((currentIndex) => getIndexAfter(currentIndex, -1))
 	}
 
 	const showNextImage = () => {
-		setActiveImageIndex((currentIndex) => (currentIndex + 1) % HERO_IMAGES.length)
+		setActiveImageIndex((currentIndex) => getIndexAfter(currentIndex, 1))
 	}
 
 	const handleTouchStart = (event: TouchEvent<HTMLElement>) => {
