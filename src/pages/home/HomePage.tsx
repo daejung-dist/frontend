@@ -5,7 +5,7 @@ import ProductSection from '@/pages/home/components/ProductSection'
 
 function HomePage() {
 	return (
-		<div className="pb-18 max-[700px]:pb-10">
+		<div>
 			<HeroSection />
 			<InfoSection />
 			<ProductSection />
