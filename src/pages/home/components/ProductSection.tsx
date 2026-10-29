@@ -1,4 +1,4 @@
-import ProductCard from '@/features/hongge/components/ProductCard'
+import ProductGrid from '@/features/hongge/components/ProductGrid'
 import { useHongges } from '@/features/hongge/hooks/useHongges'
 
 function ProductSection() {
@@ -12,14 +12,7 @@ function ProductSection() {
 				</h2>
 			</div>
 
-			<div className="grid grid-cols-2 gap-3 max-[700px]:gap-2">
-				{hongges?.map((product) => (
-					<ProductCard key={product.id} product={product} />
-				))}
-			</div>
-			{isPending && <p className="py-8 text-center text-sm">상품을 불러오는 중입니다.</p>}
-			{isError && <p className="py-8 text-center text-sm">상품을 불러오지 못했습니다.</p>}
-			{hongges?.length === 0 && <p className="py-8 text-center text-sm">준비 중인 상품이 없습니다.</p>}
+			<ProductGrid products={hongges} isPending={isPending} isError={isError} />
 		</section>
 	)
 }
