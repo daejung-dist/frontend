@@ -6,11 +6,11 @@ import GlobalNav from '@/shared/components/common/GlobalNav'
 
 function MainLayout() {
 	return (
-		<div className="min-h-dvh bg-white">
+		<div className="flex min-h-dvh flex-col bg-white">
 			<Header />
 			<GlobalNav />
 
-			<main className="min-h-130 max-[700px]:min-h-105">
+			<main className="flex-1">
 				<div className="page-container">
 					<Outlet />
 				</div>
