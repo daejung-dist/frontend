@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import type { PointerEvent, TouchEvent } from 'react'
+import type { PointerEvent } from 'react'
 
 import heroCrabMarket960 from '@/shared/assets/images/banners/hero-crab-market-960.webp'
 import heroCrabMarket from '@/shared/assets/images/banners/hero-crab-market.webp'
@@ -35,7 +35,7 @@ function HeroSection() {
 	const [activeImageIndex, setActiveImageIndex] = useState(0)
 	const [isPausedByUser, setIsPausedByUser] = useState(false)
 	const [isHovered, setIsHovered] = useState(false)
-	const touchStartRef = useRef<{ x: number; y: number } | null>(null)
+	const swipeStartRef = useRef<{ x: number; y: number } | null>(null)
 	const isPaused = isPausedByUser || isHovered
 
 	// 수동으로 넘겼을 때 바로 다시 넘어가지 않도록 인덱스가 바뀔 때마다 타이머를 새로 건다
@@ -66,7 +66,10 @@ function HeroSection() {
 	}
 
 	const handlePointerLeave = (event: PointerEvent<HTMLElement>) => {
-		if (event.pointerType === 'mouse') setIsHovered(false)
+		if (event.pointerType !== 'mouse') return
+		setIsHovered(false)
+		// 배너 밖에서 버튼을 놓으면 pointerup이 오지 않으므로 끌던 상태를 여기서 버린다
+		swipeStartRef.current = null
 	}
 
 	const showPrevImage = () => {
@@ -77,19 +80,24 @@ function HeroSection() {
 		setActiveImageIndex((currentIndex) => getIndexAfter(currentIndex, 1))
 	}
 
-	const handleTouchStart = (event: TouchEvent<HTMLElement>) => {
-		const touch = event.touches[0]
-		touchStartRef.current = { x: touch.clientX, y: touch.clientY }
+	// 터치 스와이프와 마우스 드래그를 포인터 이벤트 하나로 처리한다
+	const handlePointerDown = (event: PointerEvent<HTMLElement>) => {
+		if (!event.isPrimary || event.button !== 0) return
+		swipeStartRef.current = { x: event.clientX, y: event.clientY }
 	}
 
-	const handleTouchEnd = (event: TouchEvent<HTMLElement>) => {
-		const touchStart = touchStartRef.current
-		touchStartRef.current = null
-		if (!touchStart) return
+	// touch-pan-y 때문에 세로 스크롤이 시작되면 브라우저가 pointercancel을 보낸다
+	const handlePointerCancel = () => {
+		swipeStartRef.current = null
+	}
 
-		const touch = event.changedTouches[0]
-		const deltaX = touch.clientX - touchStart.x
-		const deltaY = touch.clientY - touchStart.y
+	const handlePointerUp = (event: PointerEvent<HTMLElement>) => {
+		const swipeStart = swipeStartRef.current
+		swipeStartRef.current = null
+		if (!swipeStart) return
+
+		const deltaX = event.clientX - swipeStart.x
+		const deltaY = event.clientY - swipeStart.y
 
 		// 세로 스크롤하다 살짝 옆으로 밀린 경우는 넘기지 않는다
 		if (Math.abs(deltaX) < SWIPE_THRESHOLD || Math.abs(deltaX) < Math.abs(deltaY)) return
@@ -103,16 +111,19 @@ function HeroSection() {
 
 	return (
 		<section
-			className="relative min-h-[440px] overflow-hidden border-2 border-[#aeb9bd] bg-[#f1f1ee] p-1 shadow-[inset_0_0_0_1px_white,0_1px_3px_rgba(0,0,0,0.2)] max-[700px]:min-h-[330px] max-[700px]:p-0 touch-pan-y"
+			className="relative min-h-[440px] overflow-hidden border-2 border-[#aeb9bd] bg-[#f1f1ee] p-1 shadow-[inset_0_0_0_1px_white,0_1px_3px_rgba(0,0,0,0.2)] max-[700px]:min-h-[330px] max-[700px]:p-0 touch-pan-y select-none"
 			aria-label="대정유통 대표 상품"
 			aria-roledescription="carousel"
-			onTouchStart={handleTouchStart}
-			onTouchEnd={handleTouchEnd}
+			onPointerDown={handlePointerDown}
+			onPointerUp={handlePointerUp}
+			onPointerCancel={handlePointerCancel}
 			onPointerEnter={handlePointerEnter}
 			onPointerLeave={handlePointerLeave}
 		>
 			<img
 				className="block h-[432px] w-full border border-[#8e999d] object-cover max-[700px]:h-[330px] max-[700px]:border-0"
+				// 마우스로 끌 때 브라우저 기본 이미지 드래그가 시작되면 pointerup 대신 pointercancel이 와서 넘어가지 않는다
+				draggable={false}
 				src={HERO_IMAGES[activeImageIndex].src}
 				srcSet={HERO_IMAGES[activeImageIndex].srcSet}
 				sizes={HERO_IMAGE_SIZES}
