@@ -1,3 +1,5 @@
+import { BUSINESS_ADDRESS } from '@/shared/constants/contact'
+
 function Footer() {
 	return (
 		<footer className="border-t border-[#e5e9ec] bg-[#f4f6f7] text-xs text-[#6d7780]">
@@ -5,6 +7,9 @@ function Footer() {
 				<div>
 					<strong className="text-base text-[#273848]">대정유통</strong>
 					<p className="mt-2.5">좋은 상품과 정직한 마음을 전합니다.</p>
+					<address className="mt-1.5 not-italic">
+						주소: ({BUSINESS_ADDRESS.zonecode}) {BUSINESS_ADDRESS.road}
+					</address>
 				</div>
 			</div>
 			{/* 구분선이 여백까지 뻗지 않도록 컨테이너 안쪽에 둔다 */}
