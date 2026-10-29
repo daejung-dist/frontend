@@ -10,7 +10,6 @@ const navigationItems = [
 function GlobalNav() {
 	return (
 		<nav
-			id="site-navigation"
 			className="border-y-2 border-[#8dbbd0] border-b-[#7faabd] bg-brand-sky shadow-[inset_0_1px_0_rgba(255,255,255,0.85),inset_0_-1px_0_rgba(38,105,133,0.25)]"
 			aria-label="주 메뉴"
 		>
@@ -18,7 +17,9 @@ function GlobalNav() {
 				{navigationItems.map((item) => (
 					<NavLink
 						key={item.to}
-						className="flex-1 text-center text-[11px] font-semibold text-text-primary hover:underline"
+						className={({ isActive }) =>
+							`flex-1 text-center text-[11px] hover:underline ${isActive ? 'font-black text-brand-ocean' : 'font-semibold text-text-primary'}`
+						}
 						end={item.to === '/'}
 						to={item.to}
 					>
