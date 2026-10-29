@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import type { TouchEvent } from 'react'
+import type { PointerEvent, TouchEvent } from 'react'
 
 import heroCrabMarket from '@/shared/assets/images/banners/hero-crab-market.webp'
 import heroCrabSorting from '@/shared/assets/images/banners/hero-crab-sorting.webp'
@@ -18,16 +18,30 @@ const controlButtonClassName =
 
 function HeroSection() {
 	const [activeImageIndex, setActiveImageIndex] = useState(0)
+	const [isPausedByUser, setIsPausedByUser] = useState(false)
+	const [isHovered, setIsHovered] = useState(false)
 	const touchStartRef = useRef<{ x: number; y: number } | null>(null)
+	const isPaused = isPausedByUser || isHovered
 
 	// 수동으로 넘겼을 때 바로 다시 넘어가지 않도록 인덱스가 바뀔 때마다 타이머를 새로 건다
 	useEffect(() => {
+		if (isPaused) return
+
 		const timeoutId = window.setTimeout(() => {
 			setActiveImageIndex((currentIndex) => (currentIndex + 1) % HERO_IMAGES.length)
 		}, AUTO_SLIDE_DELAY)
 
 		return () => window.clearTimeout(timeoutId)
-	}, [activeImageIndex])
+	}, [activeImageIndex, isPaused])
+
+	// 터치 기기는 탭할 때 enter만 발생하고 leave가 오지 않아 멈춘 채로 남으므로 마우스일 때만 처리한다
+	const handlePointerEnter = (event: PointerEvent<HTMLElement>) => {
+		if (event.pointerType === 'mouse') setIsHovered(true)
+	}
+
+	const handlePointerLeave = (event: PointerEvent<HTMLElement>) => {
+		if (event.pointerType === 'mouse') setIsHovered(false)
+	}
 
 	const showPrevImage = () => {
 		setActiveImageIndex((currentIndex) => (currentIndex - 1 + HERO_IMAGES.length) % HERO_IMAGES.length)
@@ -68,6 +82,8 @@ function HeroSection() {
 			aria-roledescription="carousel"
 			onTouchStart={handleTouchStart}
 			onTouchEnd={handleTouchEnd}
+			onPointerEnter={handlePointerEnter}
+			onPointerLeave={handlePointerLeave}
 		>
 			<img
 				className="block h-[432px] w-full border border-[#8e999d] object-cover max-[700px]:h-[330px] max-[700px]:border-0"
@@ -109,6 +125,14 @@ function HeroSection() {
 				</div>
 				<button className={controlButtonClassName} type="button" aria-label="다음 배너" onClick={showNextImage}>
 					›
+				</button>
+				<button
+					className={controlButtonClassName}
+					type="button"
+					aria-label={isPausedByUser ? '배너 자동 넘김 재생' : '배너 자동 넘김 멈춤'}
+					onClick={() => setIsPausedByUser((paused) => !paused)}
+				>
+					<span className="text-[10px]">{isPausedByUser ? '▶' : '❚❚'}</span>
 				</button>
 			</div>
 		</section>
