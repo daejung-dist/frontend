@@ -10,7 +10,7 @@ const navigationItems = [
 function GlobalNav() {
 	return (
 		<nav
-			className="border-y-2 border-[#8dbbd0] border-b-[#7faabd] bg-brand-sky shadow-[inset_0_1px_0_rgba(255,255,255,0.85),inset_0_-1px_0_rgba(38,105,133,0.25)]"
+			className="border-y border-brand-ocean-deep bg-brand-sky shadow-[inset_0_1px_0_rgba(255,255,255,0.35)]"
 			aria-label="주 메뉴"
 		>
 			<div className="page-container flex h-8 items-center divide-x divide-[#a9cddd]">
