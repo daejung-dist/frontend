@@ -24,7 +24,7 @@ function FloatingSocialLinks() {
 		>
 			{SOCIAL_LINKS.map(({ name, href, icon, hoverClassName }) => (
 				<a
-					className={`group flex w-20 flex-col items-center border border-brand-ocean-deep bg-white px-2 py-3 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_2px_7px_rgba(0,0,0,0.16)] transition-transform hover:-translate-y-0.5 ${hoverClassName} max-[700px]:w-16 max-[700px]:px-1.5 max-[700px]:py-2`}
+					className={`group flex w-20 flex-col items-center border border-border-strong bg-white px-2 py-3 text-center shadow-[0_2px_7px_rgba(0,0,0,0.16)] transition-transform hover:-translate-y-0.5 ${hoverClassName} max-[700px]:w-16 max-[700px]:px-1.5 max-[700px]:py-2`}
 					key={name}
 					href={href}
 					target="_blank"

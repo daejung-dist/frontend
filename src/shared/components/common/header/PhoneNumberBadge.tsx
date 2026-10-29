@@ -7,7 +7,7 @@ type PhoneNumberBadgeProps = {
 function PhoneNumberBadge({ className = '' }: PhoneNumberBadgeProps) {
 	return (
 		<div
-			className={`flex items-center border border-brand-ocean-deep bg-[#fafafa] px-1 py-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.35)] ${className}`}
+			className={`flex items-center border border-border-strong bg-[#fafafa] px-1 py-1 ${className}`}
 			aria-label="전화 주문 안내"
 		>
 			<span className="text-flash-sun rounded-md bg-brand-crab px-2 py-1.5 text-center text-sm font-black leading-4 text-white">

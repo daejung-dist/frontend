@@ -16,6 +16,7 @@
 	--surface-muted: #f6f7f5;
 	--surface-accent: #fff7e6;
 	--border-subtle: #d9ded9;
+	--border-strong: #94a7b1;
 	--text-primary: #1d2421;
 	--text-secondary: #5d6963;
 	--text-inverse: #ffffff;
@@ -38,6 +39,7 @@
 	--color-surface-muted: var(--surface-muted);
 	--color-surface-accent: var(--surface-accent);
 	--color-border-subtle: var(--border-subtle);
+	--color-border-strong: var(--border-strong);
 	--color-text-primary: var(--text-primary);
 	--color-text-secondary: var(--text-secondary);
 	--color-text-inverse: var(--text-inverse);

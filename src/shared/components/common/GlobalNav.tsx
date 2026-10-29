@@ -9,10 +9,7 @@ const navigationItems = [
 
 function GlobalNav() {
 	return (
-		<nav
-			className="border-y border-brand-ocean-deep bg-brand-sky shadow-[inset_0_1px_0_rgba(255,255,255,0.35)]"
-			aria-label="주 메뉴"
-		>
+		<nav className="border-y border-border-strong bg-brand-sky" aria-label="주 메뉴">
 			<div className="page-container flex h-8 items-center divide-x divide-[#a9cddd]">
 				{navigationItems.map((item) => (
 					<NavLink

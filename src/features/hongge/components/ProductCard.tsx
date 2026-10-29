@@ -8,10 +8,7 @@ interface ProductCardProps {
 
 function ProductCard({ product }: ProductCardProps) {
 	return (
-		<Link
-			className="block overflow-hidden border border-brand-ocean-deep bg-[#f8f8f6] p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.35)]"
-			to={`/products/${product.id}`}
-		>
+		<Link className="block overflow-hidden border border-border-strong bg-[#f8f8f6] p-1" to={`/products/${product.id}`}>
 			<img
 				className="block aspect-560/360 w-full border border-[#9da9ad] object-cover"
 				src={product.thumbnailUrl}

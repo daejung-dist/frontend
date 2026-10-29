@@ -70,7 +70,7 @@ function AuthMenu() {
 
 function UtilityBar() {
 	return (
-		<div className="h-7 border-y border-brand-ocean-deep bg-brand-ocean text-[11px] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35)] max-[700px]:h-auto">
+		<div className="h-7 border-y border-border-strong bg-brand-ocean text-[11px] text-white max-[700px]:h-auto">
 			<div className="page-container flex h-full items-center justify-between max-[700px]:flex-col max-[700px]:items-start max-[700px]:gap-1 max-[700px]:py-1.5">
 				<span className="font-bold max-[700px]:text-[10px]">
 					[대정유통] 후포리 명품 홍게 - 산지의 맛을 전합니다. <span className="text-brand-sun">전상품 무료배송!</span>

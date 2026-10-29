@@ -7,7 +7,7 @@ type BankAccountBadgeProps = {
 function BankAccountBadge({ className = '' }: BankAccountBadgeProps) {
 	return (
 		<div
-			className={`w-39 border border-brand-ocean-deep bg-[#fafafa] py-1.5 text-center text-[11px] leading-[1.35] shadow-[inset_0_1px_0_rgba(255,255,255,0.35)] ${className}`}
+			className={`w-39 border border-border-strong bg-[#fafafa] py-1.5 text-center text-[11px] leading-[1.35] ${className}`}
 		>
 			<p className="text-flash-sun font-bold text-brand-ocean">{BANK_ACCOUNT.bank}</p>
 			<p className="font-semibold text-black">
