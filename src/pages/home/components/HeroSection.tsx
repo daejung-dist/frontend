@@ -1,15 +1,28 @@
 import { useEffect, useRef, useState } from 'react'
 import type { PointerEvent, TouchEvent } from 'react'
 
+import heroCrabMarket960 from '@/shared/assets/images/banners/hero-crab-market-960.webp'
 import heroCrabMarket from '@/shared/assets/images/banners/hero-crab-market.webp'
+import heroCrabSorting960 from '@/shared/assets/images/banners/hero-crab-sorting-960.webp'
 import heroCrabSorting from '@/shared/assets/images/banners/hero-crab-sorting.webp'
+import heroCrab960 from '@/shared/assets/images/banners/hero-crab-960.webp'
 import heroCrab from '@/shared/assets/images/banners/hero-crab.webp'
 
 const HERO_IMAGES = [
-	{ src: heroCrabMarket, alt: '위판장에 가득 펼쳐진 갓 잡은 홍게' },
-	{ src: heroCrabSorting, alt: '위판장에서 홍게를 손으로 하나씩 선별하는 모습' },
-	{ src: heroCrab, alt: '위판장 바닥에 줄지어 놓인 자연산 홍게' },
+	{
+		src: heroCrabMarket,
+		srcSet: `${heroCrabMarket960} 960w, ${heroCrabMarket} 1280w`,
+		alt: '위판장에 가득 펼쳐진 갓 잡은 홍게',
+	},
+	{
+		src: heroCrabSorting,
+		srcSet: `${heroCrabSorting960} 960w, ${heroCrabSorting} 1280w`,
+		alt: '위판장에서 홍게를 손으로 하나씩 선별하는 모습',
+	},
+	{ src: heroCrab, srcSet: `${heroCrab960} 960w, ${heroCrab} 1280w`, alt: '위판장 바닥에 줄지어 놓인 자연산 홍게' },
 ]
+// 모바일 배너는 330px 높이를 4:3 사진으로 채우므로(object-cover) 화면 너비보다 넓은 약 440px로 그려진다
+const HERO_IMAGE_SIZES = '(max-width: 700px) 440px, 960px'
 const AUTO_SLIDE_DELAY = 5000
 const SWIPE_THRESHOLD = 50
 
@@ -35,6 +48,17 @@ function HeroSection() {
 
 		return () => window.clearTimeout(timeoutId)
 	}, [activeImageIndex, isPaused])
+
+	// 처음 넘어갈 때 빈 화면이 보이지 않도록 나머지 배너를 미리 받아 둔다.
+	// 화면의 <img>와 같은 srcSet·sizes를 줘야 브라우저가 같은 크기의 파일을 고른다.
+	useEffect(() => {
+		HERO_IMAGES.slice(1).forEach(({ src, srcSet }) => {
+			const image = new Image()
+			image.sizes = HERO_IMAGE_SIZES
+			image.srcset = srcSet
+			image.src = src
+		})
+	}, [])
 
 	// 터치 기기는 탭할 때 enter만 발생하고 leave가 오지 않아 멈춘 채로 남으므로 마우스일 때만 처리한다
 	const handlePointerEnter = (event: PointerEvent<HTMLElement>) => {
@@ -90,7 +114,11 @@ function HeroSection() {
 			<img
 				className="block h-[432px] w-full border border-[#8e999d] object-cover max-[700px]:h-[330px] max-[700px]:border-0"
 				src={HERO_IMAGES[activeImageIndex].src}
+				srcSet={HERO_IMAGES[activeImageIndex].srcSet}
+				sizes={HERO_IMAGE_SIZES}
 				alt={HERO_IMAGES[activeImageIndex].alt}
+				// 첫 화면에서 가장 큰 요소라 첫 배너만 다른 리소스보다 먼저 받게 한다
+				fetchPriority={activeImageIndex === 0 ? 'high' : 'auto'}
 			/>
 			<div className="absolute inset-y-1 left-1 flex w-[45%] flex-col items-start justify-center pl-10 text-left max-[700px]:inset-y-0 max-[700px]:left-0 max-[700px]:w-[70%] max-[700px]:pl-5">
 				<p className="rounded-md bg-brand-crab px-4 py-1 text-xl font-black tracking-[-1px] text-white max-[700px]:px-2.5 max-[700px]:text-sm">
