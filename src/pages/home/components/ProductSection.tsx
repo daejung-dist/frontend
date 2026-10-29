@@ -6,11 +6,8 @@ function ProductSection() {
 
 	return (
 		<section aria-labelledby="home-products-title">
-			<div className="mb-3 border-b-2 border-brand-ocean bg-[#f3f6f7] px-3 py-2 text-left shadow-[inset_0_1px_0_white]">
-				<h2
-					className="mt-0.5 text-xl font-black tracking-[-1px] text-black max-[700px]:text-lg"
-					id="home-products-title"
-				>
+			<div className="mb-3 border-b-2 border-brand-ocean bg-[#f3f6f7] px-3 py-2 shadow-[inset_0_1px_0_white]">
+				<h2 className="text-xl font-black tracking-[-1px] text-black max-[700px]:text-lg" id="home-products-title">
 					추천상품
 				</h2>
 			</div>
@@ -22,6 +19,7 @@ function ProductSection() {
 			</div>
 			{isPending && <p className="py-8 text-center text-sm">상품을 불러오는 중입니다.</p>}
 			{isError && <p className="py-8 text-center text-sm">상품을 불러오지 못했습니다.</p>}
+			{hongges?.length === 0 && <p className="py-8 text-center text-sm">준비 중인 상품이 없습니다.</p>}
 		</section>
 	)
 }
