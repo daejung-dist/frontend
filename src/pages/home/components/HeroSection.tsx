@@ -77,11 +77,11 @@ function HeroSection() {
 				<p className="mt-3 rounded-md bg-brand-crab px-4 py-1 text-xl font-black tracking-[-1px] text-white max-[700px]:mt-2 max-[700px]:px-2 max-[700px]:text-[11px]">
 					후포 수협 69번 중매인이 선별한
 				</p>
-				<h2 className="mt-4 text-[46px] font-black leading-tight tracking-[-2px] text-black [-webkit-text-stroke:6px_white] [paint-order:stroke_fill] max-[700px]:mt-2.5 max-[700px]:text-2xl max-[700px]:[-webkit-text-stroke:4px_white]">
+				<h1 className="mt-4 text-[46px] font-black leading-tight tracking-[-2px] text-black [-webkit-text-stroke:6px_white] [paint-order:stroke_fill] max-[700px]:mt-2.5 max-[700px]:text-2xl max-[700px]:[-webkit-text-stroke:4px_white]">
 					100% 품질보장
 					<br />
 					자연산 홍게
-				</h2>
+				</h1>
 			</div>
 
 			{/* 문구와 겹치지 않도록 컨트롤은 하단 중앙에 모은다 */}

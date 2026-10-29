@@ -13,7 +13,7 @@
 		/>
 
 		<!-- favicon -->
-		<link rel="icon" type="image/svg+xml" href="/favicon.png" />
+		<link rel="icon" type="image/png" href="/favicon.png" />
 
 		<!-- Open Graph -->
 		<meta property="og:type" content="website" />
@@ -29,6 +29,37 @@
 		<meta name="twitter:title" content="대정유통 | 신선한 홍게 산지직송" />
 		<meta name="twitter:description" content="산지의 신선함을 담은 홍게와 엄선한 수산물을 대정유통에서 만나보세요." />
 		<meta name="twitter:image" content="https://daejung.shop/og-image.png" />
+
+		<!-- 구조화 데이터: 검색 결과에 사이트 이름과 업체 정보를 표시하는 데 쓰인다 -->
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@graph": [
+					{
+						"@type": "WebSite",
+						"name": "대정유통",
+						"url": "https://daejung.shop/"
+					},
+					{
+						"@type": "Organization",
+						"name": "대정유통",
+						"alternateName": "Daejung Distribution",
+						"url": "https://daejung.shop/",
+						"logo": "https://daejung.shop/favicon.png",
+						"telephone": "+82-10-3536-6261",
+						"address": {
+							"@type": "PostalAddress",
+							"addressCountry": "KR",
+							"postalCode": "36369",
+							"addressRegion": "경상북도",
+							"addressLocality": "울진군 후포면",
+							"streetAddress": "후포로 150 신아냉동"
+						},
+						"sameAs": ["https://open.kakao.com/o/sQpf3SQc", "https://band.us/n/a4a1bbqe80j73"]
+					}
+				]
+			}
+		</script>
 	</head>
 	<body>
 		<div id="root"></div>

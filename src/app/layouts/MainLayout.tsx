@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router'
 
+import CanonicalLink from '@/shared/components/common/CanonicalLink'
 import Footer from '@/shared/components/common/Footer'
 import Header from '@/shared/components/common/Header'
 import GlobalNav from '@/shared/components/common/GlobalNav'
@@ -7,6 +8,7 @@ import GlobalNav from '@/shared/components/common/GlobalNav'
 function MainLayout() {
 	return (
 		<div className="flex min-h-dvh flex-col bg-white">
+			<CanonicalLink />
 			<Header />
 			<GlobalNav />
 

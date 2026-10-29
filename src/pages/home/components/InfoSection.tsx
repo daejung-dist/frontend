@@ -24,9 +24,9 @@ function InfoSection() {
 						<p className="text-sm font-black tracking-[0.12em] text-brand-crab max-[700px]:text-xs">
 							깊은 바다의 붉은 보물
 						</p>
-						<h3 className="mt-1 font-serif text-[30px] font-bold tracking-[-1px] text-[#332b27] max-[700px]:text-[23px]">
+						<h2 className="mt-1 font-serif text-[30px] font-bold tracking-[-1px] text-[#332b27] max-[700px]:text-[23px]">
 							홍게가 사랑받는 이유
-						</h3>
+						</h2>
 						<p className="mt-2 text-xs font-bold text-[#6d5c50] max-[700px]:text-[11px]">
 							대게 못지않은 깊은 풍미를 더 넉넉하고 합리적으로
 						</p>
@@ -38,7 +38,7 @@ function InfoSection() {
 								<span className="absolute top-0 left-0 text-sm text-brand-crab" aria-hidden="true">
 									♥
 								</span>
-								<h4 className="text-sm font-black text-[#463930] max-[700px]:text-xs">{benefit.title}</h4>
+								<h3 className="text-sm font-black text-[#463930] max-[700px]:text-xs">{benefit.title}</h3>
 								<p className="mt-0.5 text-[11px] leading-[1.65] text-[#6f655e] max-[700px]:text-[10px]">
 									{benefit.description}
 								</p>
