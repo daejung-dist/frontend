@@ -111,7 +111,7 @@ function HeroSection() {
 
 	return (
 		<section
-			className="relative overflow-hidden border-2 border-[#aeb9bd] bg-[#f1f1ee] p-1 shadow-[inset_0_0_0_1px_white,0_1px_3px_rgba(0,0,0,0.2)] max-[700px]:border-0 max-[700px]:p-0 touch-pan-y select-none"
+			className="relative overflow-hidden touch-pan-y select-none"
 			aria-label="대정유통 대표 상품"
 			aria-roledescription="carousel"
 			onPointerDown={handlePointerDown}
@@ -121,7 +121,7 @@ function HeroSection() {
 			onPointerLeave={handlePointerLeave}
 		>
 			<img
-				className="block h-[432px] w-full border border-[#8e999d] object-cover max-[700px]:h-[330px] max-[700px]:border-0"
+				className="block h-[432px] w-full object-cover max-[700px]:h-[330px]"
 				// 마우스로 끌 때 브라우저 기본 이미지 드래그가 시작되면 pointerup 대신 pointercancel이 와서 넘어가지 않는다
 				draggable={false}
 				src={HERO_IMAGES[activeImageIndex].src}
@@ -131,7 +131,7 @@ function HeroSection() {
 				// 첫 화면에서 가장 큰 요소라 첫 배너만 다른 리소스보다 먼저 받게 한다
 				fetchPriority={activeImageIndex === 0 ? 'high' : 'auto'}
 			/>
-			<div className="absolute inset-y-1 left-1 flex w-[45%] flex-col items-start justify-center pl-10 text-left max-[700px]:inset-y-0 max-[700px]:left-0 max-[700px]:w-[70%] max-[700px]:pl-5">
+			<div className="absolute inset-y-0 left-0 flex w-[45%] flex-col items-start justify-center pl-10 text-left max-[700px]:w-[70%] max-[700px]:pl-5">
 				<p className="rounded-md bg-brand-crab px-4 py-1 text-xl font-black tracking-[-1px] text-white max-[700px]:px-2.5 max-[700px]:text-sm">
 					산지직송 당일배송
 				</p>
