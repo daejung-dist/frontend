@@ -1,35 +1,34 @@
 import { isAxiosError } from 'axios'
-import { useState } from 'react'
+import { useEffect } from 'react'
 import { NavLink } from 'react-router'
 
-import { logout } from '@/features/auth/api/auth'
+import { useLogout } from '@/features/auth/hooks/useLogout'
 import { useAuthStore } from '@/features/auth/stores/authStore'
 
+const LOGOUT_ERROR_DURATION = 3000
+
+function Divider() {
+	return <span className="text-white/50">|</span>
+}
+
 function UtilityBar() {
+	// clearAuth가 user를 함께 비우므로 isAuthenticated 없이 user만으로 로그인 여부를 판단한다.
 	const user = useAuthStore((state) => state.user)
-	const isAuthenticated = useAuthStore((state) => state.isAuthenticated)
 	const isBootstrapping = useAuthStore((state) => state.isBootstrapping)
-	const clearAuth = useAuthStore((state) => state.clearAuth)
+	const logoutMutation = useLogout()
+	const { isError, reset } = logoutMutation
 
-	const [isLoggingOut, setIsLoggingOut] = useState(false)
-	const [logoutError, setLogoutError] = useState('')
+	// 실패 문구가 계속 남지 않도록 잠시 보여준 뒤 지운다.
+	useEffect(() => {
+		if (!isError) return
+		const timer = setTimeout(reset, LOGOUT_ERROR_DURATION)
+		return () => clearTimeout(timer)
+	}, [isError, reset])
 
-	const handleLogout = async () => {
-		setIsLoggingOut(true)
-		setLogoutError('')
-
-		try {
-			await logout()
-			clearAuth()
-		} catch (error) {
-			const message = isAxiosError(error)
-				? (error.response?.data as { message?: string } | undefined)?.message
-				: undefined
-			setLogoutError(message ?? '로그아웃에 실패했습니다.')
-		} finally {
-			setIsLoggingOut(false)
-		}
-	}
+	const logoutError = isError
+		? (isAxiosError<{ message?: string }>(logoutMutation.error) && logoutMutation.error.response?.data?.message) ||
+			'로그아웃에 실패했습니다.'
+		: ''
 
 	return (
 		<div className="h-7 border-y border-brand-ocean-deep bg-brand-ocean text-[11px] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.35)] max-[700px]:h-auto">
@@ -40,17 +39,17 @@ function UtilityBar() {
 				<div className="flex items-center gap-1.5 text-[10px]">
 					{isBootstrapping ? (
 						<span className="text-white/70">로그인 확인 중...</span>
-					) : isAuthenticated && user ? (
+					) : user ? (
 						<>
 							<span className="font-bold text-brand-sun">{user.name}님</span>
-							<span className="text-white/50">|</span>
+							<Divider />
 							<button
 								className="hover:text-brand-sun disabled:cursor-wait disabled:text-white/60"
 								type="button"
-								disabled={isLoggingOut}
-								onClick={handleLogout}
+								disabled={logoutMutation.isPending}
+								onClick={() => logoutMutation.mutate()}
 							>
-								{isLoggingOut ? '로그아웃 중...' : '로그아웃'}
+								{logoutMutation.isPending ? '로그아웃 중...' : '로그아웃'}
 							</button>
 						</>
 					) : (
@@ -58,7 +57,7 @@ function UtilityBar() {
 							<NavLink className="hover:text-brand-sun" to="/login">
 								로그인
 							</NavLink>
-							<span className="text-white/50">|</span>
+							<Divider />
 							<NavLink className="hover:text-brand-sun" to="/signup">
 								회원가입
 							</NavLink>
@@ -69,11 +68,11 @@ function UtilityBar() {
 							{logoutError}
 						</span>
 					)}
-					<span className="text-white/50">|</span>
+					<Divider />
 					<NavLink className="hover:text-brand-sun" to="/mypage">
 						마이페이지
 					</NavLink>
-					<span className="text-white/50">|</span>
+					<Divider />
 					<NavLink className="hover:text-brand-sun" to="/cart">
 						장바구니
 					</NavLink>
