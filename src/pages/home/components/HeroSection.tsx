@@ -111,7 +111,7 @@ function HeroSection() {
 
 	return (
 		<section
-			className="relative min-h-[440px] overflow-hidden border-2 border-[#aeb9bd] bg-[#f1f1ee] p-1 shadow-[inset_0_0_0_1px_white,0_1px_3px_rgba(0,0,0,0.2)] max-[700px]:min-h-[330px] max-[700px]:p-0 touch-pan-y select-none"
+			className="relative overflow-hidden border-2 border-[#aeb9bd] bg-[#f1f1ee] p-1 shadow-[inset_0_0_0_1px_white,0_1px_3px_rgba(0,0,0,0.2)] max-[700px]:border-0 max-[700px]:p-0 touch-pan-y select-none"
 			aria-label="대정유통 대표 상품"
 			aria-roledescription="carousel"
 			onPointerDown={handlePointerDown}
