@@ -6,9 +6,9 @@ import heroCrabSorting from '@/shared/assets/images/banners/hero-crab-sorting.we
 import heroCrab from '@/shared/assets/images/banners/hero-crab.webp'
 
 const HERO_IMAGES = [
-	{ src: heroCrab, alt: '위판장 바닥에 줄지어 놓인 자연산 홍게' },
-	{ src: heroCrabSorting, alt: '위판장에서 홍게를 손으로 하나씩 선별하는 모습' },
 	{ src: heroCrabMarket, alt: '위판장에 가득 펼쳐진 갓 잡은 홍게' },
+	{ src: heroCrabSorting, alt: '위판장에서 홍게를 손으로 하나씩 선별하는 모습' },
+	{ src: heroCrab, alt: '위판장 바닥에 줄지어 놓인 자연산 홍게' },
 ]
 const AUTO_SLIDE_DELAY = 5000
 const SWIPE_THRESHOLD = 50
