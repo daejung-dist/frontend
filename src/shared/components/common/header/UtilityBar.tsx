@@ -5,7 +5,7 @@ import { NavLink } from 'react-router'
 import { logout } from '@/features/auth/api/auth'
 import { useAuthStore } from '@/features/auth/stores/authStore'
 
-function TopBar() {
+function UtilityBar() {
 	const user = useAuthStore((state) => state.user)
 	const isAuthenticated = useAuthStore((state) => state.isAuthenticated)
 	const isBootstrapping = useAuthStore((state) => state.isBootstrapping)
@@ -83,4 +83,4 @@ function TopBar() {
 	)
 }
 
-export default TopBar
+export default UtilityBar

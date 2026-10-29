@@ -3,7 +3,7 @@ import { NavLink } from 'react-router'
 import BankAccountBadge from '@/shared/components/common/header/BankAccountBadge'
 import DirectOrderBadge from '@/shared/components/common/header/DirectOrderBadge'
 
-function MainHeader() {
+function BrandBar() {
 	return (
 		<div className="page-container relative flex h-23.5 items-center bg-white shadow-[inset_0_-1px_0_#edf2f4] max-[700px]:h-16 max-[700px]:border-0">
 			{/* 모바일에서는 MobileContactBar가 대신 보여 주므로 숨긴다 */}
@@ -55,4 +55,4 @@ function MainHeader() {
 	)
 }
 
-export default MainHeader
+export default BrandBar

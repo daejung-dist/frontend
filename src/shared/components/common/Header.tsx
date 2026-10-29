@@ -1,12 +1,12 @@
-import MainHeader from '@/shared/components/common/header/MainHeader'
+import BrandBar from '@/shared/components/common/header/BrandBar'
 import MobileContactBar from '@/shared/components/common/header/MobileContactBar'
-import TopBar from '@/shared/components/common/header/TopBar'
+import UtilityBar from '@/shared/components/common/header/UtilityBar'
 
 function Header() {
 	return (
-		<header className="bg-white">
-			<TopBar />
-			<MainHeader />
+		<header>
+			<UtilityBar />
+			<BrandBar />
 			<MobileContactBar />
 		</header>
 	)

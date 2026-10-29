@@ -7,7 +7,7 @@ const navigationItems = [
 	{ label: '고객문의', to: '/support' },
 ]
 
-function Navigation() {
+function GlobalNav() {
 	return (
 		<nav
 			id="site-navigation"
@@ -30,4 +30,4 @@ function Navigation() {
 	)
 }
 
-export default Navigation
+export default GlobalNav
