@@ -2,7 +2,7 @@ import { NavLink } from 'react-router'
 
 import CrabIcon from '@/shared/assets/icons/crab_icon.svg'
 import BankAccountBadge from '@/shared/components/common/header/BankAccountBadge'
-import DirectOrderBadge from '@/shared/components/common/header/DirectOrderBadge'
+import PhoneNumberBadge from '@/shared/components/common/header/PhoneNumberBadge'
 
 function BrandBar() {
 	return (
@@ -26,7 +26,7 @@ function BrandBar() {
 				</span>
 			</NavLink>
 
-			<DirectOrderBadge className="ml-auto max-[700px]:hidden" />
+			<PhoneNumberBadge className="ml-auto max-[700px]:hidden" />
 		</div>
 	)
 }

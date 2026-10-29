@@ -1,10 +1,10 @@
 import { ORDER_PHONE } from '@/shared/constants/contact'
 
-type DirectOrderBadgeProps = {
+type PhoneNumberBadgeProps = {
 	className?: string
 }
 
-function DirectOrderBadge({ className = '' }: DirectOrderBadgeProps) {
+function PhoneNumberBadge({ className = '' }: PhoneNumberBadgeProps) {
 	return (
 		<div
 			className={`flex items-center border border-[#c7c7c7] bg-[#fafafa] px-1 py-1 ${className}`}
@@ -25,4 +25,4 @@ function DirectOrderBadge({ className = '' }: DirectOrderBadgeProps) {
 	)
 }
 
-export default DirectOrderBadge
+export default PhoneNumberBadge
