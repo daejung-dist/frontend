@@ -9,7 +9,7 @@ interface ProductCardProps {
 function ProductCard({ product }: ProductCardProps) {
 	return (
 		<Link
-			className="block overflow-hidden border-2 border-[#b8c2c6] bg-[#f8f8f6] p-1 shadow-[inset_0_0_0_1px_white]"
+			className="block overflow-hidden border border-brand-ocean-deep bg-[#f8f8f6] p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.35)]"
 			to={`/products/${product.id}`}
 		>
 			<img
