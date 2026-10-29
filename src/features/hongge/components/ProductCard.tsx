@@ -24,12 +24,10 @@ function ProductCard({ product }: ProductCardProps) {
 					<strong className="text-flash-sun text-base font-black text-brand-crab">
 						{product.price.toLocaleString()}원
 					</strong>
-					<button
-						className="shrink-0 border border-brand-crab bg-brand-crab px-3 py-1 text-[11px] font-bold text-white shadow-[1px_1px_0_#fff]"
-						type="button"
-					>
+					{/* 카드 전체가 링크라 링크 안에 버튼을 넣을 수 없으므로 버튼 모양만 낸다 */}
+					<span className="shrink-0 border border-brand-crab bg-brand-crab px-3 py-1 text-[11px] font-bold text-white shadow-[1px_1px_0_#fff]">
 						상품 보기
-					</button>
+					</span>
 				</div>
 			</div>
 		</Link>
