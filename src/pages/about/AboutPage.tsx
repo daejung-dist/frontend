@@ -1,28 +1,18 @@
-import crabMarket from '@/shared/assets/images/231277CA-2CF2-414A-BFFF-A49218EDE585.jpg'
-import crabPack from '@/shared/assets/images/270DEFEF-DC65-4A7A-BCAC-3C723A1746CD.jpg'
-import heroCrab from '@/shared/assets/images/banners/hero-crab.webp'
-
 const promises = [
 	{
 		number: '1',
 		title: '중매인 직배송',
 		description: '산지 직송으로 더욱 신선하게!',
-		image: heroCrab,
-		alt: '바다에서 조업 중인 배',
 	},
 	{
 		number: '2',
 		title: '철저한 품질 관리',
 		description: '꼼꼼한 검수로 최고 품질만!',
-		image: crabPack,
-		alt: '포장된 홍게 상품',
 	},
 	{
 		number: '3',
 		title: '신속 안전 배송',
 		description: '신선도를 지켜 안전하게 배송!',
-		image: crabMarket,
-		alt: '수산물 산지 작업 현장',
 	},
 ]
 
@@ -45,26 +35,19 @@ function AboutPage() {
 						>
 							바다의 신선함을 온전히 담아냅니다
 						</h1>
-						<div className="mt-5 grid grid-cols-[1.05fr_0.95fr] items-center gap-7 max-[700px]:grid-cols-1 max-[700px]:gap-4">
-							<img
-								className="h-52 w-full border border-[#9da9ad] object-cover max-[700px]:h-44"
-								src={heroCrab}
-								alt="푸른 바다와 홍게"
-							/>
-							<div className="text-center max-[700px]:text-left">
-								<p className="text-sm font-bold leading-6 text-text-primary">
-									대정유통은 수산물 유통 전문 기업으로,
-									<br className="max-[700px]:hidden" />
-									중매인 직배송 시스템을 통해
-									<br className="max-[700px]:hidden" />
-									가장 신선한 자연의 맛을 고객님의 식탁까지
-									<br className="max-[700px]:hidden" />
-									안전하게 배달합니다.
-								</p>
-								<p className="mt-5 text-xl font-black tracking-[-1px] text-brand-crab max-[700px]:mt-3 max-[700px]:text-lg">
-									100% 품질 보장, 정직한 먹거리
-								</p>
-							</div>
+						<div className="mt-5 text-center max-[700px]:text-left">
+							<p className="text-sm font-bold leading-6 text-text-primary">
+								대정유통은 수산물 유통 전문 기업으로,
+								<br className="max-[700px]:hidden" />
+								중매인 직배송 시스템을 통해
+								<br className="max-[700px]:hidden" />
+								가장 신선한 자연의 맛을 고객님의 식탁까지
+								<br className="max-[700px]:hidden" />
+								안전하게 배달합니다.
+							</p>
+							<p className="mt-5 text-xl font-black tracking-[-1px] text-brand-crab max-[700px]:mt-3 max-[700px]:text-lg">
+								100% 품질 보장, 정직한 먹거리
+							</p>
 						</div>
 					</div>
 				</div>
@@ -85,11 +68,6 @@ function AboutPage() {
 									<h3 className="text-sm font-black text-black">{promise.title}</h3>
 								</div>
 								<p className="mt-0.5 text-[11px] text-[#606b70]">{promise.description}</p>
-								<img
-									className="mt-2 h-28 w-full border border-[#aeb9bd] object-cover max-[700px]:h-40"
-									src={promise.image}
-									alt={promise.alt}
-								/>
 							</article>
 						))}
 					</div>
