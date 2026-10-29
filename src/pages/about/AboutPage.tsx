@@ -1,6 +1,6 @@
 import crabMarket from '@/shared/assets/images/231277CA-2CF2-414A-BFFF-A49218EDE585.jpg'
 import crabPack from '@/shared/assets/images/270DEFEF-DC65-4A7A-BCAC-3C723A1746CD.jpg'
-import heroCrab from '@/shared/assets/images/banners/hero-crab.jpg'
+import heroCrab from '@/shared/assets/images/banners/hero-crab.webp'
 
 const promises = [
 	{

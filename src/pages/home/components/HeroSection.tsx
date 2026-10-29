@@ -1,10 +1,15 @@
 import { useEffect, useRef, useState } from 'react'
 import type { TouchEvent } from 'react'
 
-import heroCalamari from '@/shared/assets/images/banners/hero-calamari.jpg'
-import heroCrab from '@/shared/assets/images/banners/hero-crab.jpg'
+import heroCrabMarket from '@/shared/assets/images/banners/hero-crab-market.webp'
+import heroCrabSorting from '@/shared/assets/images/banners/hero-crab-sorting.webp'
+import heroCrab from '@/shared/assets/images/banners/hero-crab.webp'
 
-const HERO_IMAGES = [heroCrab, heroCalamari]
+const HERO_IMAGES = [
+	{ src: heroCrab, alt: '위판장 바닥에 줄지어 놓인 자연산 홍게' },
+	{ src: heroCrabSorting, alt: '위판장에서 홍게를 손으로 하나씩 선별하는 모습' },
+	{ src: heroCrabMarket, alt: '위판장에 가득 펼쳐진 갓 잡은 홍게' },
+]
 const AUTO_SLIDE_DELAY = 5000
 const SWIPE_THRESHOLD = 50
 
@@ -66,8 +71,8 @@ function HeroSection() {
 		>
 			<img
 				className="block h-[432px] w-full border border-[#8e999d] object-cover max-[700px]:h-[330px] max-[700px]:border-0"
-				src={HERO_IMAGES[activeImageIndex]}
-				alt={`대정유통 배너 이미지 ${activeImageIndex + 1} / ${HERO_IMAGES.length}`}
+				src={HERO_IMAGES[activeImageIndex].src}
+				alt={HERO_IMAGES[activeImageIndex].alt}
 			/>
 			<div className="absolute inset-y-1 left-1 flex w-[45%] flex-col items-start justify-center pl-10 text-left max-[700px]:inset-y-0 max-[700px]:left-0 max-[700px]:w-[70%] max-[700px]:pl-5">
 				<p className="rounded-md bg-brand-crab px-4 py-1 text-xl font-black tracking-[-1px] text-white max-[700px]:px-2.5 max-[700px]:text-sm">
@@ -91,7 +96,7 @@ function HeroSection() {
 				<div className="flex items-center gap-2">
 					{HERO_IMAGES.map((image, index) => (
 						<button
-							key={image}
+							key={image.src}
 							className={`size-2.5 rounded-full border border-white transition-colors ${
 								index === activeImageIndex ? 'bg-white' : 'bg-white/30 hover:bg-white/60'
 							}`}
