@@ -25,7 +25,7 @@ function InfoSection() {
 	return (
 		<section className="bg-[#fffefa] px-12 py-10 max-[700px]:px-6 max-[700px]:py-7">
 			<p className="text-sm font-black tracking-[0.12em] text-brand-crab max-[700px]:text-xs">깊은 바다의 붉은 보물</p>
-			<h2 className="mt-1 font-serif text-[30px] font-bold tracking-[-1px] text-[#332b27] max-[700px]:text-[23px]">
+			<h2 className="mt-1 text-[30px] font-bold tracking-[-1px] text-[#332b27] max-[700px]:text-[23px]">
 				울진 홍게가 특별한 이유
 			</h2>
 			<p className="mt-2 text-xs font-bold text-[#6d5c50] max-[700px]:text-[11px]">
