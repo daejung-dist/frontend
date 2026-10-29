@@ -6,7 +6,7 @@ import Navigation from '@/shared/components/common/Navigation'
 
 function MainLayout() {
 	return (
-		<div className="min-h-screen bg-white">
+		<div className="min-h-dvh bg-white">
 			<Header />
 			<Navigation />
 
