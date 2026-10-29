@@ -65,8 +65,7 @@ function HeroSection() {
 			onTouchEnd={handleTouchEnd}
 		>
 			<img
-				key={HERO_IMAGES[activeImageIndex]}
-				className="block h-[432px] w-full animate-in border border-[#8e999d] fade-in duration-500 object-cover max-[700px]:h-[330px] max-[700px]:border-0"
+				className="block h-[432px] w-full border border-[#8e999d] object-cover max-[700px]:h-[330px] max-[700px]:border-0"
 				src={HERO_IMAGES[activeImageIndex]}
 				alt={`대정유통 배너 이미지 ${activeImageIndex + 1} / ${HERO_IMAGES.length}`}
 			/>
