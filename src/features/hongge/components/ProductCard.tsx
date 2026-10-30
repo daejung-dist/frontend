@@ -8,7 +8,7 @@ interface ProductCardProps {
 
 function ProductCard({ product }: ProductCardProps) {
 	return (
-		<Link className="block overflow-hidden border-2 border-[#b8c2c6] bg-[#f8f8f6] p-1 shadow-[inset_0_0_0_1px_white]" to={`/products/${product.id}`}>
+		<Link className="block overflow-hidden border border-border-strong bg-[#f8f8f6] p-1" to={`/products/${product.id}`}>
 			<img
 				className="block aspect-560/360 w-full border border-[#9da9ad] object-cover"
 				src={product.thumbnailUrl}
@@ -18,8 +18,13 @@ function ProductCard({ product }: ProductCardProps) {
 			<div className="border-t border-[#c3cbce] px-3 py-2.5 max-[700px]:px-2 max-[700px]:py-2">
 				<h3 className="m-0 text-sm font-bold text-black max-[700px]:text-[13px]">{product.name}</h3>
 				<div className="mt-2 flex items-center justify-between gap-3">
-					<strong className="text-flash-sun text-base font-black text-brand-crab">{product.price.toLocaleString()}원</strong>
-					<button className="shrink-0 border border-brand-crab bg-brand-crab px-3 py-1 text-[11px] font-bold text-white shadow-[1px_1px_0_#fff]" type="button">상품 보기</button>
+					<strong className="text-flash-sun text-base font-black text-brand-crab">
+						{product.price.toLocaleString()}원
+					</strong>
+					{/* 카드 전체가 링크라 링크 안에 버튼을 넣을 수 없으므로 버튼 모양만 낸다 */}
+					<span className="shrink-0 border border-brand-crab bg-brand-crab px-3 py-1 text-[11px] font-bold text-white shadow-[1px_1px_0_#fff]">
+						상품 보기
+					</span>
 				</div>
 			</div>
 		</Link>

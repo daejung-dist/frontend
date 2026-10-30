@@ -1,15 +1,21 @@
 import { Outlet } from 'react-router'
 
+import CanonicalLink from '@/shared/components/common/CanonicalLink'
 import Footer from '@/shared/components/common/Footer'
 import Header from '@/shared/components/common/Header'
+import GlobalNav from '@/shared/components/common/GlobalNav'
 
 function MainLayout() {
 	return (
-		<div className="min-h-screen bg-white">
+		<div className="flex min-h-dvh flex-col bg-white">
+			<CanonicalLink />
 			<Header />
+			<GlobalNav />
 
-			<main className="min-h-130 max-[700px]:min-h-105">
-				<Outlet />
+			<main className="flex-1">
+				<div className="page-container border-x border-border-strong p-1">
+					<Outlet />
+				</div>
 			</main>
 
 			<Footer />

@@ -7,13 +7,13 @@ import { useAuthBootstrap } from '@/features/auth/hooks/useAuthBootstrap'
 const queryClient = new QueryClient()
 
 function App() {
-  useAuthBootstrap()
+	useAuthBootstrap()
 
-  return (
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
-  )
+	return (
+		<QueryClientProvider client={queryClient}>
+			<RouterProvider router={router} />
+		</QueryClientProvider>
+	)
 }
 
 export default App

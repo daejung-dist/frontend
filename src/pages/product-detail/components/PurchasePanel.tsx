@@ -31,7 +31,9 @@ function PurchasePanel({ hongge }: PurchasePanelProps) {
 					>
 						<Minus aria-hidden="true" size={14} />
 					</button>
-					<span className="w-10 text-center text-sm font-bold" aria-live="polite">{soldOut ? 0 : count}</span>
+					<span className="w-10 text-center text-sm font-bold" aria-live="polite">
+						{soldOut ? 0 : count}
+					</span>
 					<button
 						className="flex size-8 items-center justify-center disabled:opacity-40"
 						type="button"
@@ -46,7 +48,9 @@ function PurchasePanel({ hongge }: PurchasePanelProps) {
 
 			<div className="flex items-center justify-between py-4">
 				<span className="text-sm font-bold text-[#606b70]">총 상품금액</span>
-				<strong className="text-2xl font-black text-brand-crab">{(hongge.price * (soldOut ? 0 : count)).toLocaleString()}원</strong>
+				<strong className="text-2xl font-black text-brand-crab">
+					{(hongge.price * (soldOut ? 0 : count)).toLocaleString()}원
+				</strong>
 			</div>
 
 			<div className="grid grid-cols-2 gap-2">
