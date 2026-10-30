@@ -6,7 +6,9 @@ export const BANK_ACCOUNT = {
 
 export const ORDER_PHONE = '010-3536-6261'
 
-export const BUSINESS_ADDRESS = {
-	zonecode: '36369',
-	road: '경북 울진군 후포면 후포로 150 신아냉동',
+export const BUSINESS_INFO = {
+	name: '대정유통',
+	representative: '안덕준',
+	registrationNumber: '101-96-86283',
+	address: '경북 울진군 후포면 울진대게로 176',
 } as const
