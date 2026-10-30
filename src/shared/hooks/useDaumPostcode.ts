@@ -11,9 +11,7 @@ export interface DaumPostcodeData {
 }
 
 interface DaumPostcodeApi {
-	Postcode: new (options: {
-		oncomplete: (data: DaumPostcodeData) => void
-	}) => {
+	Postcode: new (options: { oncomplete: (data: DaumPostcodeData) => void }) => {
 		open: () => void
 	}
 }
