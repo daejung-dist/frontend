@@ -4,4 +4,4 @@ Disallow: /mypage
 Disallow: /cart
 Disallow: /checkout
 
-Sitemap: https://daejung.shop/sitemap.xml
+Sitemap: https://www.daejung.shop/sitemap.xml
