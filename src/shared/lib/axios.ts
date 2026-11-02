@@ -3,6 +3,7 @@ import type { InternalAxiosRequestConfig } from 'axios'
 
 import { useAuthStore } from '@/features/auth/stores/authStore'
 import type { AuthResponse } from '@/features/auth/types'
+import { useServerStatusStore } from '@/shared/stores/serverStatusStore'
 
 const baseConfig = {
 	baseURL: import.meta.env.VITE_API_BASE_URL,
@@ -15,6 +16,18 @@ export const api = axios.create(baseConfig)
 
 // 재발급 요청은 인터셉터를 타지 않는 별도 인스턴스로 보내 무한 루프를 막는다.
 const refreshClient = axios.create(baseConfig)
+
+// 서버가 꺼져 있으면 응답 자체가 없고, 프록시만 살아 있으면 502~504가 온다.
+// 사용자 기기의 인터넷이 끊긴 경우는 서버 문제가 아니므로 제외한다.
+function checkServerDown(error: unknown) {
+	if (!axios.isAxiosError(error) || axios.isCancel(error) || !navigator.onLine) {
+		return
+	}
+	const status = error.response?.status
+	if (status === undefined || status === 502 || status === 503 || status === 504) {
+		useServerStatusStore.getState().markServerDown()
+	}
+}
 
 let refreshPromise: Promise<string> | null = null
 let bootstrapPromise: Promise<void> | null = null
@@ -38,7 +51,8 @@ export function refreshAccessToken() {
 export function bootstrapAuth() {
 	bootstrapPromise ??= refreshAccessToken()
 		.then(() => undefined)
-		.catch(() => {
+		.catch((error) => {
+			checkServerDown(error)
 			useAuthStore.getState().clearAuth()
 		})
 		.finally(() => {
@@ -62,6 +76,8 @@ api.interceptors.request.use(async (config) => {
 api.interceptors.response.use(
 	(response) => response,
 	async (error) => {
+		checkServerDown(error)
+
 		if (!axios.isAxiosError(error) || error.response?.status !== 401) {
 			return Promise.reject(error)
 		}
