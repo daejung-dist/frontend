@@ -4,7 +4,7 @@ import UtilityBar from '@/shared/components/common/header/UtilityBar'
 
 function Header() {
 	return (
-		<header>
+		<header data-nosnippet>
 			<UtilityBar />
 			<BrandBar />
 			<MobileContactBar />
