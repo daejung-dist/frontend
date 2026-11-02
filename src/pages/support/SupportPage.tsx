@@ -1,14 +1,12 @@
 import { useState, type FormEvent } from 'react'
+import { Link } from 'react-router'
 
-import { sampleSupportPosts } from '@/features/support/sampleSupportPosts'
+import { supportPosts as posts } from '@/features/support/sampleSupportPosts'
 import type { SupportPost, SupportSearchField } from '@/features/support/types'
 import Pagination from '@/shared/components/ui/Pagination'
 
 const PAGE_SIZE = 10
 const NEW_POST_DAYS = 3
-
-// TODO: 게시판 API가 나오면 조회 훅으로 교체한다. 운영 화면에 예시 글이 보이지 않도록 개발 서버에서만 쓴다
-const posts: SupportPost[] = import.meta.env.DEV ? sampleSupportPosts : []
 
 const searchFields: { value: SupportSearchField; label: string }[] = [
 	{ value: 'all', label: '전체' },
@@ -89,7 +87,12 @@ function SupportPage() {
 								{post.isNotice ? '공지' : post.id}
 							</td>
 							<td className="truncate py-4 pr-2 pl-4 text-left max-[700px]:pl-2">
-								<span className={post.isNotice ? 'font-bold text-black' : 'text-black'}>{post.title}</span>
+								<Link
+									className={`hover:underline ${post.isNotice ? 'font-bold text-black' : 'text-black'}`}
+									to={`/support/${post.id}`}
+								>
+									{post.title}
+								</Link>
 								{isNewPost(post.createdAt) && <span className="ml-1.5 text-xs font-bold text-brand-crab">NEW</span>}
 							</td>
 							<td className="py-4 max-[700px]:hidden">{post.author}</td>
@@ -107,7 +110,16 @@ function SupportPage() {
 				</tbody>
 			</table>
 
-			<form className="mt-8 flex gap-2 max-[520px]:flex-wrap" role="search" onSubmit={handleSearch}>
+			<div className="mt-4 flex justify-end">
+				<Link
+					className="inline-flex h-10 items-center bg-[#222] px-6 text-sm font-bold text-white hover:bg-black"
+					to="/support/write"
+				>
+					글쓰기
+				</Link>
+			</div>
+
+			<form className="mt-6 flex gap-2 max-[520px]:flex-wrap" role="search" onSubmit={handleSearch}>
 				<label className="sr-only" htmlFor="support-search-field">
 					검색 범위
 				</label>

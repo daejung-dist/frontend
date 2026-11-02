@@ -5,6 +5,7 @@ export interface SupportPost {
 	createdAt: string
 	views: number
 	isNotice: boolean
+	content: string
 }
 
 export type SupportSearchField = 'all' | 'title' | 'author'

@@ -15,7 +15,9 @@ import WithdrawPage from '@/pages/mypage/withdraw/WithdrawPage'
 import ProductListPage from '@/pages/product-list/ProductListPage'
 import ProductDetailPage from '@/pages/product-detail/ProductDetailPage'
 import SignupPage from '@/pages/signup/SignupPage'
+import SupportDetailPage from '@/pages/support/detail/SupportDetailPage'
 import SupportPage from '@/pages/support/SupportPage'
+import SupportWritePage from '@/pages/support/write/SupportWritePage'
 import NotFoundPage from '@/pages/NotFoundPage'
 
 const router = createBrowserRouter([
@@ -41,6 +43,10 @@ const router = createBrowserRouter([
 			{
 				path: '/support',
 				element: <SupportPage />,
+			},
+			{
+				path: '/support/:id',
+				element: <SupportDetailPage />,
 			},
 			{
 				path: '/login',
@@ -78,6 +84,10 @@ const router = createBrowserRouter([
 								element: <WithdrawPage />,
 							},
 						],
+					},
+					{
+						path: '/support/write',
+						element: <SupportWritePage />,
 					},
 					{
 						path: '/cart',
