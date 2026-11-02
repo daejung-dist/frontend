@@ -1,29 +1,17 @@
-import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { useQueryClient } from '@tanstack/react-query'
 import { isAxiosError } from 'axios'
 
 import { useAuthStore } from '@/features/auth/stores/authStore'
-import { getMyProfile } from '@/features/user/api/user'
 import ProfileForm from '@/features/user/components/ProfileForm'
+import { getMyProfileQueryKey, useMyProfile } from '@/features/user/hooks/useMyProfile'
 import type { UpdateUserProfileRequest, UserProfile } from '@/features/user/types'
 
 function ProfilePage() {
 	const user = useAuthStore((state) => state.user)
-	const isAuthenticated = useAuthStore((state) => state.isAuthenticated)
 	const updateUser = useAuthStore((state) => state.updateUser)
 	const queryClient = useQueryClient()
-	const queryKey = ['my-profile', user?.id]
-	const profileQuery = useQuery({
-		queryKey,
-		queryFn: async () => {
-			const profile = await getMyProfile()
-			updateUser(profile)
-			return profile
-		},
-		enabled: isAuthenticated,
-		gcTime: 0,
-		retry: false,
-		refetchOnWindowFocus: false,
-	})
+	const queryKey = getMyProfileQueryKey(user?.id)
+	const profileQuery = useMyProfile()
 	const handleSaved = async (payload: UpdateUserProfileRequest) => {
 		if (profileQuery.data) {
 			const profile = { ...profileQuery.data, ...payload }
