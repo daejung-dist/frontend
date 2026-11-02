@@ -4,7 +4,6 @@ const menuItems = [
 	{ label: '주문목록/배송조회', to: '/mypage/orders' },
 	{ label: '개인정보확인/수정', to: '/mypage/profile' },
 	{ label: '배송지 관리', to: '/mypage/addresses' },
-	// 탈퇴 기능이 준비되기 전까지는 등록되지 않은 경로라 404 페이지가 보인다
 	{ label: '회원 탈퇴', to: '/mypage/withdraw' },
 ]
 

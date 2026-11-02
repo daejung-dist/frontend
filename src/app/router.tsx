@@ -11,6 +11,7 @@ import AddressPage from '@/pages/mypage/addresses/AddressPage'
 import MyPageLayout from '@/pages/mypage/MyPageLayout'
 import OrderListPage from '@/pages/mypage/orders/OrderListPage'
 import ProfilePage from '@/pages/mypage/profile/ProfilePage'
+import WithdrawPage from '@/pages/mypage/withdraw/WithdrawPage'
 import ProductListPage from '@/pages/product-list/ProductListPage'
 import ProductDetailPage from '@/pages/product-detail/ProductDetailPage'
 import SignupPage from '@/pages/signup/SignupPage'
@@ -66,6 +67,10 @@ const router = createBrowserRouter([
 							{
 								path: 'addresses',
 								element: <AddressPage />,
+							},
+							{
+								path: 'withdraw',
+								element: <WithdrawPage />,
 							},
 						],
 					},
