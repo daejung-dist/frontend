@@ -6,7 +6,7 @@ import { getMyProfile } from '@/features/user/api/user'
 import ProfileForm from '@/features/user/components/ProfileForm'
 import type { UpdateUserProfileRequest, UserProfile } from '@/features/user/types'
 
-function MyPage() {
+function ProfilePage() {
 	const user = useAuthStore((state) => state.user)
 	const isAuthenticated = useAuthStore((state) => state.isAuthenticated)
 	const updateUser = useAuthStore((state) => state.updateUser)
@@ -37,13 +37,10 @@ function MyPage() {
 		: undefined
 
 	return (
-		<section className="p-6 max-[700px]:p-4" aria-labelledby="mypage-title">
-			<p className="w-fit bg-brand-ocean px-3 py-1 text-xs font-black text-white">MY PAGE</p>
-			<h1 className="mt-3 text-2xl font-black tracking-[-1px] text-black" id="mypage-title">
-				마이페이지
+		<section aria-labelledby="profile-title">
+			<h1 className="text-2xl font-black tracking-[-1px] text-black" id="profile-title">
+				개인정보확인/수정
 			</h1>
-			<p className="mt-2 text-sm text-[#606b70]">회원 정보와 주문 내역을 확인하는 공간입니다.</p>
-
 			{profileQuery.isPending && (
 				<p className="mt-6 text-sm text-[#606b70]" role="status">
 					회원 정보를 불러오는 중입니다.
@@ -64,19 +61,9 @@ function MyPage() {
 					</button>
 				</div>
 			)}
-			{profileQuery.data && <ProfileForm profile={profileQuery.data} onSaved={handleSaved} />}
-
-			<div className="mt-6 border border-[#c8d3d7] bg-white px-5 py-8 text-center">
-				<h2 className="text-base font-black text-black">주문 내역</h2>
-				<p className="mt-2 text-sm text-[#606b70]">주문 내역 API 연결 후 표시됩니다.</p>
-			</div>
-
-			<div className="mt-4 border border-[#c8d3d7] bg-white px-5 py-8 text-center">
-				<h2 className="text-base font-black text-black">배송지 관리</h2>
-				<p className="mt-2 text-sm text-[#606b70]">배송지 API 연결 후 표시됩니다.</p>
-			</div>
+			{profileQuery.data && <ProfileForm profile={profileQuery.data} onSaved={handleSaved} />}{' '}
 		</section>
 	)
 }
 
-export default MyPage
+export default ProfilePage

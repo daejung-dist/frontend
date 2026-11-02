@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router'
+import { createBrowserRouter, Navigate } from 'react-router'
 
 import MainLayout from '@/app/layouts/MainLayout'
 import ProtectedRoute from '@/features/auth/components/ProtectedRoute'
@@ -7,7 +7,10 @@ import CartPage from '@/pages/cart/CartPage'
 import CheckoutPage from '@/pages/checkout/CheckoutPage'
 import HomePage from '@/pages/home/HomePage'
 import LoginPage from '@/pages/login/LoginPage'
-import MyPage from '@/pages/mypage/MyPage'
+import AddressPage from '@/pages/mypage/addresses/AddressPage'
+import MyPageLayout from '@/pages/mypage/MyPageLayout'
+import OrderListPage from '@/pages/mypage/orders/OrderListPage'
+import ProfilePage from '@/pages/mypage/profile/ProfilePage'
 import ProductListPage from '@/pages/product-list/ProductListPage'
 import ProductDetailPage from '@/pages/product-detail/ProductDetailPage'
 import SignupPage from '@/pages/signup/SignupPage'
@@ -46,7 +49,25 @@ const router = createBrowserRouter([
 				children: [
 					{
 						path: '/mypage',
-						element: <MyPage />,
+						element: <MyPageLayout />,
+						children: [
+							{
+								index: true,
+								element: <Navigate to="/mypage/orders" replace />,
+							},
+							{
+								path: 'orders',
+								element: <OrderListPage />,
+							},
+							{
+								path: 'profile',
+								element: <ProfilePage />,
+							},
+							{
+								path: 'addresses',
+								element: <AddressPage />,
+							},
+						],
 					},
 					{
 						path: '/cart',
