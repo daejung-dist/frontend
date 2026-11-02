@@ -19,10 +19,6 @@ const promises = [
 function AboutPage() {
 	return (
 		<section className="bg-white" aria-labelledby="about-title">
-			<div className="border-b-2 border-brand-ocean-deep bg-brand-ocean px-4 py-2 text-center text-sm font-black text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.3)] max-[700px]:text-xs">
-				대정유통 · 동해의 신선함을 식탁까지, 정직과 신뢰의 해산물 전문 기업
-			</div>
-
 			<div className="px-5 py-7 max-[700px]:px-4 max-[700px]:py-5">
 				<div className="border border-[#8e999d] bg-white px-7 py-7 max-[700px]:px-4 max-[700px]:py-5">
 					<h1
@@ -67,10 +63,6 @@ function AboutPage() {
 						))}
 					</div>
 				</section>
-
-				<div className="mt-7 flex items-center justify-center gap-4 border-2 border-brand-crab bg-brand-crab px-4 py-3 text-center text-lg font-black text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.25)] max-[700px]:gap-2 max-[700px]:px-2 max-[700px]:text-sm">
-					<span>고객님의 신뢰를 최고의 신선함으로 보답하겠습니다!</span>
-				</div>
 
 				<div className="mt-5 border border-[#c3cbce] bg-[#f7f8f6] px-5 py-4 text-center text-xs leading-5 text-[#606b70] max-[700px]:px-3">
 					<p className="font-black text-text-primary">대정유통 · 후포리 홍게 전문</p>
