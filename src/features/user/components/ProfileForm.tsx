@@ -1,6 +1,6 @@
 import { isAxiosError } from 'axios'
 import { useMutation } from '@tanstack/react-query'
-import { useState, type FormEvent } from 'react'
+import { useState, type FormEvent, type ReactNode } from 'react'
 
 import type { Gender } from '@/features/auth/types'
 import { updateMyProfile } from '@/features/user/api/user'
@@ -21,6 +21,18 @@ interface ProfileFormProps {
 
 const INPUT_CLASS =
 	'h-10 w-full min-w-0 border border-[#9da9ad] bg-white px-3 text-sm text-black outline-none focus:border-brand-ocean disabled:bg-[#edf2f4]'
+// 왼쪽 칸은 마이페이지 메뉴와 같은 회색을 써서 표 형태로 보이게 한다
+function ProfileRow({ label, htmlFor, children }: { label: string; htmlFor?: string; children: ReactNode }) {
+	return (
+		<div className="grid grid-cols-[140px_1fr] border-b border-[#d5dfe3] max-[520px]:grid-cols-[96px_1fr]">
+			<div className="flex items-center border-r border-[#d5dfe3] bg-[#f8f8f6] px-4 py-4 font-bold text-[#49545a] max-[520px]:px-3">
+				{htmlFor ? <label htmlFor={htmlFor}>{label}</label> : label}
+			</div>
+			<div className="flex min-w-0 items-center px-5 py-3 max-[520px]:px-3">{children}</div>
+		</div>
+	)
+}
+
 const PHONE_NUMBER_PATTERN = /^[0-9\-+() ]{8,20}$/
 
 function ProfileForm({ profile, onSaved }: ProfileFormProps) {
@@ -96,33 +108,23 @@ function ProfileForm({ profile, onSaved }: ProfileFormProps) {
 
 	return (
 		<form className="mt-6" noValidate onSubmit={handleSubmit}>
-			<h2 className="text-base font-black text-black">회원 정보</h2>
-			<dl className="mt-3 grid grid-cols-[100px_1fr] text-sm">
-				<dt className="border-b border-[#d5dfe3] bg-[#edf2f4] px-4 py-3 font-bold text-[#49545a]">이메일</dt>
-				<dd className="break-all border-b border-[#d5dfe3] px-4 py-3 text-black">{profile.email}</dd>
-				<dt className="border-b border-[#d5dfe3] bg-[#edf2f4] px-4 py-3 font-bold text-[#49545a]">회원 권한</dt>
-				<dd className="border-b border-[#d5dfe3] px-4 py-3 text-black">{profile.role}</dd>
-			</dl>
-			<fieldset className="mt-4 grid min-w-0 grid-cols-2 gap-4 max-[520px]:grid-cols-1" disabled={mutation.isPending}>
+			<fieldset className="min-w-0 border-t border-[#d5dfe3] text-sm" disabled={mutation.isPending}>
 				<legend className="sr-only">회원 정보 수정</legend>
-				<div className="flex min-w-0 flex-col gap-1">
-					<label className="text-xs font-bold text-[#49545a]" htmlFor="mypage-name">
-						이름
-					</label>
+				<ProfileRow label="아이디(이메일)">
+					<p className="break-all font-bold text-black">{profile.email}</p>
+				</ProfileRow>
+				<ProfileRow label="이름" htmlFor="mypage-name">
 					<input
-						className={INPUT_CLASS}
+						className={`${INPUT_CLASS} max-w-[320px]`}
 						id="mypage-name"
 						autoComplete="name"
 						value={form.name}
 						onChange={(event) => onChange('name', event.target.value)}
 					/>
-				</div>
-				<div className="flex min-w-0 flex-col gap-1">
-					<label className="text-xs font-bold text-[#49545a]" htmlFor="mypage-phone">
-						휴대폰 번호
-					</label>
+				</ProfileRow>
+				<ProfileRow label="휴대폰 번호" htmlFor="mypage-phone">
 					<input
-						className={INPUT_CLASS}
+						className={`${INPUT_CLASS} max-w-[320px]`}
 						id="mypage-phone"
 						type="tel"
 						autoComplete="tel"
@@ -130,38 +132,20 @@ function ProfileForm({ profile, onSaved }: ProfileFormProps) {
 						value={form.phoneNumber}
 						onChange={(event) => onChange('phoneNumber', event.target.value)}
 					/>
-				</div>
-				<div className="col-span-full flex min-w-0 flex-col gap-1">
-					<label className="text-xs font-bold text-[#49545a]" htmlFor="mypage-address">
-						기본 배송지 주소
-					</label>
+				</ProfileRow>
+				<ProfileRow label="생년월일" htmlFor="mypage-birth-date">
 					<input
-						className={INPUT_CLASS}
-						id="mypage-address"
-						autoComplete="street-address"
-						value={form.defaultShippingAddress}
-						onChange={(event) => onChange('defaultShippingAddress', event.target.value)}
-					/>
-				</div>
-				<div className="flex min-w-0 flex-col gap-1">
-					<label className="text-xs font-bold text-[#49545a]" htmlFor="mypage-birth-date">
-						생년월일
-					</label>
-					<input
-						className={INPUT_CLASS}
+						className={`${INPUT_CLASS} max-w-[320px]`}
 						id="mypage-birth-date"
 						type="date"
 						autoComplete="bday"
 						value={form.birthDate}
 						onChange={(event) => onChange('birthDate', event.target.value)}
 					/>
-				</div>
-				<div className="flex min-w-0 flex-col gap-1">
-					<label className="text-xs font-bold text-[#49545a]" htmlFor="mypage-gender">
-						성별
-					</label>
+				</ProfileRow>
+				<ProfileRow label="성별" htmlFor="mypage-gender">
 					<select
-						className={INPUT_CLASS}
+						className={`${INPUT_CLASS} max-w-[320px]`}
 						id="mypage-gender"
 						value={form.gender}
 						onChange={(event) => {
@@ -176,7 +160,16 @@ function ProfileForm({ profile, onSaved }: ProfileFormProps) {
 						<option value="FEMALE">여성</option>
 						<option value="OTHER">기타</option>
 					</select>
-				</div>
+				</ProfileRow>
+				<ProfileRow label="기본 배송지" htmlFor="mypage-address">
+					<input
+						className={INPUT_CLASS}
+						id="mypage-address"
+						autoComplete="street-address"
+						value={form.defaultShippingAddress}
+						onChange={(event) => onChange('defaultShippingAddress', event.target.value)}
+					/>
+				</ProfileRow>
 			</fieldset>
 			{errorMessage && (
 				<p className="mt-3 text-sm font-bold text-brand-crab" role="alert">
