@@ -33,21 +33,19 @@ const controlButtonClassName =
 
 function HeroSection() {
 	const [activeImageIndex, setActiveImageIndex] = useState(0)
-	const [isPausedByUser, setIsPausedByUser] = useState(false)
 	const [isHovered, setIsHovered] = useState(false)
 	const swipeStartRef = useRef<{ x: number; y: number } | null>(null)
-	const isPaused = isPausedByUser || isHovered
 
 	// 수동으로 넘겼을 때 바로 다시 넘어가지 않도록 인덱스가 바뀔 때마다 타이머를 새로 건다
 	useEffect(() => {
-		if (isPaused) return
+		if (isHovered) return
 
 		const timeoutId = window.setTimeout(() => {
 			setActiveImageIndex((currentIndex) => getIndexAfter(currentIndex, 1))
 		}, AUTO_SLIDE_DELAY)
 
 		return () => window.clearTimeout(timeoutId)
-	}, [activeImageIndex, isPaused])
+	}, [activeImageIndex, isHovered])
 
 	// 처음 넘어갈 때 빈 화면이 보이지 않도록 나머지 배너를 미리 받아 둔다.
 	// 화면의 <img>와 같은 srcSet·sizes를 줘야 브라우저가 같은 크기의 파일을 고른다.
@@ -166,14 +164,6 @@ function HeroSection() {
 				</div>
 				<button className={controlButtonClassName} type="button" aria-label="다음 배너" onClick={showNextImage}>
 					›
-				</button>
-				<button
-					className={controlButtonClassName}
-					type="button"
-					aria-label={isPausedByUser ? '배너 자동 넘김 재생' : '배너 자동 넘김 멈춤'}
-					onClick={() => setIsPausedByUser((paused) => !paused)}
-				>
-					<span className="text-[10px]">{isPausedByUser ? '▶' : '❚❚'}</span>
 				</button>
 			</div>
 		</section>
