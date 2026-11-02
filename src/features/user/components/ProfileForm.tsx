@@ -95,7 +95,7 @@ function ProfileForm({ profile, onSaved }: ProfileFormProps) {
 	}
 
 	return (
-		<form className="mt-6 border-t-2 border-brand-ocean-deep pt-5" noValidate onSubmit={handleSubmit}>
+		<form className="mt-6" noValidate onSubmit={handleSubmit}>
 			<h2 className="text-base font-black text-black">회원 정보</h2>
 			<dl className="mt-3 grid grid-cols-[100px_1fr] text-sm">
 				<dt className="border-b border-[#d5dfe3] bg-[#edf2f4] px-4 py-3 font-bold text-[#49545a]">이메일</dt>

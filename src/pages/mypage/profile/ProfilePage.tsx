@@ -61,7 +61,7 @@ function ProfilePage() {
 					</button>
 				</div>
 			)}
-			{profileQuery.data && <ProfileForm profile={profileQuery.data} onSaved={handleSaved} />}{' '}
+			{profileQuery.data && <ProfileForm profile={profileQuery.data} onSaved={handleSaved} />}
 		</section>
 	)
 }
