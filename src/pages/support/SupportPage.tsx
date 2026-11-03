@@ -1,12 +1,13 @@
 import { useState, type FormEvent } from 'react'
-import { Link } from 'react-router'
+import { Link, useSearchParams } from 'react-router'
 
-import { supportPosts as posts } from '@/features/support/sampleSupportPosts'
-import type { SupportPost, SupportSearchField } from '@/features/support/types'
+import { useSupportNotices } from '@/features/support/hooks/useSupportNotices'
+import { useSupportPosts } from '@/features/support/hooks/useSupportPosts'
+import type { SupportSearchField } from '@/features/support/types'
+import { formatShortDate, isNewPost } from '@/features/support/utils'
 import Pagination from '@/shared/components/ui/Pagination'
 
 const PAGE_SIZE = 10
-const NEW_POST_DAYS = 3
 
 const searchFields: { value: SupportSearchField; label: string }[] = [
 	{ value: 'all', label: '전체' },
@@ -14,38 +15,50 @@ const searchFields: { value: SupportSearchField; label: string }[] = [
 	{ value: 'author', label: '작성자' },
 ]
 
-const formatDate = (date: string) => date.slice(2).replaceAll('-', '.')
+const toSearchField = (value: string | null): SupportSearchField =>
+	searchFields.find((field) => field.value === value)?.value ?? 'all'
 
-const isNewPost = (date: string) => {
-	const elapsedDays = (Date.now() - new Date(`${date}T00:00:00`).getTime()) / (1000 * 60 * 60 * 24)
-	return elapsedDays < NEW_POST_DAYS
-}
-
-const matchesKeyword = (post: SupportPost, field: SupportSearchField, keyword: string) => {
-	if (field === 'title') return post.title.includes(keyword)
-	if (field === 'author') return post.author.includes(keyword)
-	return post.title.includes(keyword) || post.author.includes(keyword)
+const toPage = (value: string | null) => {
+	const page = Number(value)
+	return Number.isInteger(page) && page > 0 ? page : 1
 }
 
 function SupportPage() {
-	const [searchField, setSearchField] = useState<SupportSearchField>('all')
-	const [keywordInput, setKeywordInput] = useState('')
-	const [search, setSearch] = useState({ field: 'all' as SupportSearchField, keyword: '' })
-	const [currentPage, setCurrentPage] = useState(1)
+	// 상세에서 뒤로 왔을 때 보던 페이지와 검색 조건이 유지되도록 주소에 담는다
+	const [searchParams, setSearchParams] = useSearchParams()
+	const currentPage = toPage(searchParams.get('page'))
+	const field = toSearchField(searchParams.get('field'))
+	const keyword = searchParams.get('keyword') ?? ''
 
-	// 공지는 검색·페이지와 상관없이 항상 맨 위에 둔다
-	const notices = posts.filter((post) => post.isNotice)
-	const filteredPosts = posts.filter(
-		(post) => !post.isNotice && (!search.keyword || matchesKeyword(post, search.field, search.keyword)),
-	)
-	const totalPages = Math.max(1, Math.ceil(filteredPosts.length / PAGE_SIZE))
-	const pagePosts = filteredPosts.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE)
+	const [searchField, setSearchField] = useState<SupportSearchField>(field)
+	const [keywordInput, setKeywordInput] = useState(keyword)
+
+	const noticesQuery = useSupportNotices()
+	const postsQuery = useSupportPosts({ page: currentPage, size: PAGE_SIZE, field, keyword })
+	const notices = noticesQuery.data ?? []
+	const posts = postsQuery.data?.posts ?? []
+	const totalPages = Math.max(1, postsQuery.data?.totalPages ?? 1)
+
+	const updateParams = (next: { page: number; field: SupportSearchField; keyword: string }) => {
+		const params = new URLSearchParams()
+		if (next.page > 1) params.set('page', String(next.page))
+		if (next.keyword) {
+			params.set('field', next.field)
+			params.set('keyword', next.keyword)
+		}
+		setSearchParams(params)
+	}
 
 	const handleSearch = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
-		setSearch({ field: searchField, keyword: keywordInput.trim() })
-		setCurrentPage(1)
+		updateParams({ page: 1, field: searchField, keyword: keywordInput.trim() })
 	}
+
+	const emptyMessage = (() => {
+		if (postsQuery.isPending) return '게시글을 불러오는 중입니다.'
+		if (postsQuery.isError) return '게시글을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.'
+		return keyword ? '검색 결과가 없습니다.' : '등록된 게시글이 없습니다.'
+	})()
 
 	return (
 		<section className="p-6 max-[700px]:p-4" aria-labelledby="support-title">
@@ -81,7 +94,8 @@ function SupportPage() {
 					</tr>
 				</thead>
 				<tbody>
-					{[...notices, ...pagePosts].map((post) => (
+					{/* 공지는 검색·페이지와 상관없이 항상 맨 위에 둔다 */}
+					{[...notices, ...posts].map((post) => (
 						<tr key={post.id} className="border-b border-[#d5dfe3] text-center text-[#49545a]">
 							<td className={`py-4 ${post.isNotice ? 'font-black text-black' : ''}`}>
 								{post.isNotice ? '공지' : post.id}
@@ -96,14 +110,14 @@ function SupportPage() {
 								{isNewPost(post.createdAt) && <span className="ml-1.5 text-xs font-bold text-brand-crab">NEW</span>}
 							</td>
 							<td className="py-4 max-[700px]:hidden">{post.author}</td>
-							<td className="py-4">{formatDate(post.createdAt)}</td>
+							<td className="py-4">{formatShortDate(post.createdAt)}</td>
 							<td className="py-4 max-[700px]:hidden">{post.views}</td>
 						</tr>
 					))}
-					{pagePosts.length === 0 && (
+					{posts.length === 0 && (
 						<tr className="border-b border-[#d5dfe3]">
 							<td className="py-16 text-center text-[#606b70]" colSpan={5}>
-								{search.keyword ? '검색 결과가 없습니다.' : '등록된 게시글이 없습니다.'}
+								{emptyMessage}
 							</td>
 						</tr>
 					)}
@@ -129,9 +143,9 @@ function SupportPage() {
 					value={searchField}
 					onChange={(event) => setSearchField(event.target.value as SupportSearchField)}
 				>
-					{searchFields.map((field) => (
-						<option key={field.value} value={field.value}>
-							{field.label}
+					{searchFields.map((option) => (
+						<option key={option.value} value={option.value}>
+							{option.label}
 						</option>
 					))}
 				</select>
@@ -152,7 +166,11 @@ function SupportPage() {
 			</form>
 
 			<div className="mt-8">
-				<Pagination currentPage={currentPage} totalPages={totalPages} onChange={setCurrentPage} />
+				<Pagination
+					currentPage={currentPage}
+					totalPages={totalPages}
+					onChange={(page) => updateParams({ page, field, keyword })}
+				/>
 			</div>
 		</section>
 	)
