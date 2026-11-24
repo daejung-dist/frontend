@@ -9,3 +9,7 @@ export async function getMyProfile() {
 export async function updateMyProfile(payload: UpdateUserProfileRequest) {
 	await api.patch('/api/v1/users/me', payload)
 }
+
+export async function withdraw(password: string) {
+	await api.delete('/api/v1/users/me', { data: { password } })
+}
