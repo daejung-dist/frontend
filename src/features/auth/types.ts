@@ -19,11 +19,21 @@ export interface SignupRequest {
 	defaultShippingAddress: string
 	birthDate: string
 	gender: Gender
+	emailVerificationToken: string
 }
 
 export interface LoginRequest {
 	email: string
 	password: string
+}
+
+export interface ConfirmEmailVerificationRequest {
+	email: string
+	code: string
+}
+
+export interface EmailVerificationTokenResponse {
+	verificationToken: string
 }
 
 export type SignupResponse = AuthResponse
