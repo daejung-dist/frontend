@@ -3,6 +3,7 @@ import { useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 
 import { signup } from '@/features/auth/api/auth'
+import EmailVerificationField from '@/features/auth/components/EmailVerificationField'
 import { useAuthStore } from '@/features/auth/stores/authStore'
 import type { Gender } from '@/features/auth/types'
 import { useDaumPostcode } from '@/shared/hooks/useDaumPostcode'
@@ -44,6 +45,14 @@ function SignupPage() {
 	const [isSubmitting, setIsSubmitting] = useState(false)
 	const [errorMessage, setErrorMessage] = useState('')
 	const [successMessage, setSuccessMessage] = useState('')
+	const [emailVerificationToken, setEmailVerificationToken] = useState<string | null>(null)
+	// key를 바꿔 인증 입력칸을 새로 그려야 안에 남은 번호·타이머·완료 표시까지 함께 지워진다
+	const [verificationResetKey, setVerificationResetKey] = useState(0)
+
+	const resetEmailVerification = () => {
+		setEmailVerificationToken(null)
+		setVerificationResetKey((key) => key + 1)
+	}
 
 	const onChange = <Field extends keyof SignupForm>(field: Field, value: SignupForm[Field]) => {
 		setForm((prev) => ({ ...prev, [field]: value }))
@@ -54,6 +63,7 @@ function SignupPage() {
 	const validate = () => {
 		if (!form.email.trim()) return '이메일은 필수입니다.'
 		if (!EMAIL_PATTERN.test(form.email.trim())) return '이메일 형식이 올바르지 않습니다.'
+		if (!emailVerificationToken) return '이메일 인증을 완료해 주세요.'
 		if (!form.password) return '비밀번호는 필수입니다.'
 		if (form.password.length < 8) return '비밀번호는 최소 8자 이상이어야 합니다.'
 		if (!form.name.trim()) return '이름은 필수입니다.'
@@ -111,14 +121,26 @@ function SignupPage() {
 				defaultShippingAddress,
 				birthDate: form.birthDate,
 				gender: form.gender as Gender,
+				emailVerificationToken: emailVerificationToken as string,
 			})
 
 			const { accessToken, ...user } = response
 			setAuth(accessToken, user)
 			setSuccessMessage(`${user.name}님, 회원가입이 완료되었습니다.`)
 			setForm(INITIAL_FORM)
+			resetEmailVerification()
 			setTimeout(() => navigate('/', { replace: true }), 800)
 		} catch (error) {
+			if (isAxiosError(error) && error.response?.status === 422) {
+				// 인증 토큰은 가입 요청에 한 번 쓰이면 사라지므로 처음부터 다시 인증하게 한다
+				resetEmailVerification()
+				setErrorMessage('이메일 인증이 만료되었습니다. 이메일 인증을 다시 해 주세요.')
+				return
+			}
+			if (isAxiosError(error) && error.response?.status === 409) {
+				setErrorMessage('이미 가입된 이메일입니다.')
+				return
+			}
 			if (isAxiosError(error)) {
 				const message = (error.response?.data as { message?: string } | undefined)?.message
 				setErrorMessage(message ?? '회원가입에 실패했습니다. 잠시 후 다시 시도해 주세요.')
@@ -140,21 +162,13 @@ function SignupPage() {
 			</div>
 
 			<form className="mt-6" noValidate onSubmit={handleSubmit}>
-				<div className="flex flex-col gap-1">
-					<label className="text-xs font-bold text-[#49545a]" htmlFor="signup-email">
-						이메일
-					</label>
-					<input
-						className="h-10 border border-[#9da9ad] bg-white px-3 text-sm shadow-[inset_1px_1px_0_#e4e9eb] outline-none focus:border-brand-ocean focus:shadow-[inset_0_0_0_1px_var(--brand-sky)]"
-						id="signup-email"
-						type="email"
-						autoComplete="email"
-						placeholder="daejung@example.com"
-						value={form.email}
-						disabled={isSubmitting}
-						onChange={(event) => onChange('email', event.target.value)}
-					/>
-				</div>
+				<EmailVerificationField
+					key={verificationResetKey}
+					email={form.email}
+					disabled={isSubmitting}
+					onEmailChange={(value) => onChange('email', value)}
+					onVerifiedChange={setEmailVerificationToken}
+				/>
 
 				<div className="mt-3 flex flex-col gap-1">
 					<label className="text-xs font-bold text-[#49545a]" htmlFor="signup-password">
