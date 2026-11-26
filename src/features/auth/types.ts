@@ -19,6 +19,7 @@ export interface SignupRequest {
 	defaultShippingAddress: string
 	birthDate: string
 	gender: Gender
+	emailVerificationToken: string
 }
 
 export interface LoginRequest {
