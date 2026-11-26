@@ -26,5 +26,14 @@ export interface LoginRequest {
 	password: string
 }
 
+export interface ConfirmEmailVerificationRequest {
+	email: string
+	code: string
+}
+
+export interface EmailVerificationTokenResponse {
+	verificationToken: string
+}
+
 export type SignupResponse = AuthResponse
 export type LoginResponse = AuthResponse
